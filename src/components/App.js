@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from "react";
 import {
-  getSomething
-} from '../api';
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { Home } from ".";
+import { CharacterSheetApp } from "./CharacterSheet";
+import { ItemsApp } from "./Items";
+import { CalendarApp } from "./Calendar";
+import { MechanicsApp } from "./Mechanics";
+import { NarrativeApp } from "./Narrative";
+import { WorldInfoApp } from "./WorldInfo";
 
 const App = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    getSomething()
-      .then(response => {
-        setMessage(response.message);
-      })
-      .catch(error => {
-        setMessage(error.message);
-      });
-  });
-
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-      <h2>{ message }</h2>
-    </div>
+    <>
+      <Route path="/">
+        <Home />
+      </Route>
+      {/* Need to figure out how to call different sub apps with routes here so this page isn't huge. */}
+    </>
   );
-}
+};
 
 export default App;

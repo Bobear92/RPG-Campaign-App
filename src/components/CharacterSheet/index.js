@@ -1,4 +1,3 @@
-export { default as CharacterSheetApp } from "./CharacterSheetApp";
 export { default as CharacterSheet } from "./CharacterSheet";
 export { default as ClassInfo } from "./ClassInfo";
 export { default as Feats } from "./Feats";

@@ -11,9 +11,6 @@ const client = new Client({
       : undefined,
 });
 
-// database methods
-
-// export
 module.exports = {
   client,
 };

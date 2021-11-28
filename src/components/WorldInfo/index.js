@@ -1,4 +1,3 @@
-export { default as WorldInfoApp } from "./WorldInfoApp";
 export { default as Adventures } from "./Adventures";
 export { default as Map } from "./Map";
 export { default as NPCs } from "./NPCs";

@@ -20,6 +20,76 @@ async function createUser({ username, password, admin }) {
   }
 }
 
+async function getUser({ username, password }) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    SELECT * FROM users
+    WHERE username=$1;
+    `,
+      [username]
+    );
+
+    if (!user) {
+      return;
+    }
+
+    if (user.password !== password) {
+      return;
+    }
+    delete user.password;
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getUserById(id) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    SELECT * FROM users
+    WHERE id=$1;
+    `,
+      [id]
+    );
+
+    delete user.password;
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getUserByUsername(username) {
+  try {
+    const { rows } = await client.query(
+      `
+    SELECT * FROM users
+    WHERE username=$1;
+    `,
+      [username]
+    );
+    if (!rows || !rows.length) {
+      return null;
+    }
+
+    const [user] = rows;
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
+  getUser,
+  getUserById,
+  getUserByUsername,
 };

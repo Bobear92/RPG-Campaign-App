@@ -1,4 +1,3 @@
-export { default as NarrativeApp } from "./NarrativeApp";
 export { default as Backstory } from "./Backstory";
 export { default as CharacterInfo } from "./CharacterInfo";
 export { default as Notes } from "./Notes";

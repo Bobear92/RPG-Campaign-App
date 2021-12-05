@@ -28,14 +28,19 @@ const App = () => {
         <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
           {/* Top Level Routes */}
+
           <Route exact path="/">
             <Home />
           </Route>
+          {/* // */}
           {/* Calendar routes */}
+          {/* // */}
           <Route path="/calendar">
             <Calendar />
           </Route>
+          {/* // */}
           {/* Character Sheet routes */}
+          {/* // */}
           <Route path="/spell-list">
             <SpellList />
           </Route>
@@ -54,7 +59,9 @@ const App = () => {
           <Route path="/sheet">
             <CharacterSheet />
           </Route>
+          {/* // */}
           {/* Items routes*/}
+          {/* // */}
           <Route path="/equipment">
             <Equipment />
           </Route>
@@ -64,7 +71,9 @@ const App = () => {
           <Route path="/saved-items">
             <SavedItems />
           </Route>
+          {/* // */}
           {/* Mechanics Routes */}
+          {/* // */}
           <Route path="/classes">
             <Classes />
           </Route>
@@ -77,7 +86,9 @@ const App = () => {
           <Route path="/saved-mechanics">
             <SavedMechanics />
           </Route>
+          {/* // */}
           {/* Narrative Routes */}
+          {/* // */}
           <Route path="/backstory">
             <Backstory />
           </Route>
@@ -90,7 +101,9 @@ const App = () => {
           <Route path="/saved-info">
             <SavedInfo />
           </Route>
+          {/* // */}
           {/* World Info Routes */}
+          {/* // */}
           <Route path="/adventures">
             <Adventures />
           </Route>

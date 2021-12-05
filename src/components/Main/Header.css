@@ -34,28 +34,16 @@
   color: rgb(55, 39, 73);
 }
 
-.drop-down-container {
-  color: rgb(252, 214, 0);
-  padding: 8px;
-  font-family: ubuntu;
-  border-radius: 5%;
-  text-decoration-line: none;
-  background-color: rgb(55, 39, 73);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  margin: 3px;
-  height: fit-content;
-  width: fit-content;
-}
-
-.drop-down-label {
+.header-main-buttons {
   display: flex;
-  flex-direction: column;
-  padding: 2px;
-  margin: 4px;
+  justify-content: space-evenly;
 }
 
-.drop-down-options {
-  color: black;
-  padding: 2px;
-  margin: 6px;
+.header-sub-button-links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.border {
+  border: 5px solid black;
 }

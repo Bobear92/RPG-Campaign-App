@@ -21,7 +21,17 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       {loggedIn ? (
         <>
           <div className="header-top-container">
-            <NavLink className="nav-button" to="/">
+            <NavLink
+              className="nav-button"
+              to="/"
+              onClick={() => {
+                setCharacterToggle(false);
+                setItemToggle(false);
+                setNarrativeToggle(false);
+                setWorldInfoToggle(false);
+                setMechanicsToggle(false);
+              }}
+            >
               Home
             </NavLink>
             <div className="log-reg-container">
@@ -50,7 +60,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                 setItemToggle(false);
                 setNarrativeToggle(false);
                 setWorldInfoToggle(false);
-                setMechanicsToggle(true);
+                setMechanicsToggle(false);
               }}
             >
               Character Sheet
@@ -62,7 +72,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                 setItemToggle(true);
                 setNarrativeToggle(false);
                 setWorldInfoToggle(false);
-                setMechanicsToggle(true);
+                setMechanicsToggle(false);
               }}
             >
               Items
@@ -74,7 +84,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                 setItemToggle(false);
                 setNarrativeToggle(true);
                 setWorldInfoToggle(false);
-                setMechanicsToggle(true);
+                setMechanicsToggle(false);
               }}
             >
               Narrative
@@ -86,7 +96,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                 setItemToggle(false);
                 setNarrativeToggle(false);
                 setWorldInfoToggle(true);
-                setMechanicsToggle(true);
+                setMechanicsToggle(false);
               }}
             >
               World Info

@@ -1,3 +1,16 @@
+// ___            ___
+// /   \          /   \
+// \_   \        /  __/
+//  _\   \      /  /__
+//  \___  \____/   __/
+//      \_       _/
+//        | @ @  \_
+//        |
+//      _/     /\
+//     /o)  (o/\ \_
+//     \_____/ /
+//       \____/
+
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -5,6 +18,8 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import { getToken } from "../auth";
+import { getAllSpells, spellDetails } from "../api";
 import { Home, Header } from "./Main";
 import {
   CharacterSheet,
@@ -21,7 +36,53 @@ import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 
 const App = () => {
+  // Log in stuff
   const [loggedIn, setLoggedIn] = useState(false);
+
+  function isUserLoggedIn() {
+    const token = getToken();
+
+    if (token) {
+      setLoggedIn(true);
+    }
+  }
+
+  useEffect(() => {
+    isUserLoggedIn();
+  }, []);
+
+  // All of the spell stuff
+  const [allSpells, setAllSpells] = useState([]);
+  const [spellDescriptions, setSpellDescriptions] = useState([]);
+
+  const handleSpells = async () => {
+    const data = await getAllSpells();
+    const dataResults = data.results;
+    const details = dataResults.map((spell) => {
+      const spellUrl = spell.url;
+      return spellUrl;
+    });
+    setAllSpells(details);
+  };
+  useEffect(() => {
+    handleSpells();
+  }, []);
+
+  const handleSpellDetails = async () => {
+    const data = await Promise.all(
+      allSpells.map(async (spellUrl) => {
+        const spell = await spellDetails(spellUrl);
+        return spell;
+      })
+    );
+
+    setSpellDescriptions(data);
+  };
+
+  useEffect(() => {
+    handleSpellDetails();
+  }, [allSpells]);
+
   return (
     <>
       <Router>
@@ -45,7 +106,7 @@ const App = () => {
             <SpellList />
           </Route>
           <Route path="/spell-book">
-            <SpellBook />
+            <SpellBook spellDescriptions={spellDescriptions} />
           </Route>
           <Route path="/feats">
             <Feats />

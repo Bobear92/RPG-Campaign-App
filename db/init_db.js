@@ -15,7 +15,8 @@ async function buildTables() {
       // drop all tables, in the correct order
       try {
         await client.query(`
-      DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS spells;
+        DROP TABLE IF EXISTS users;
       `);
 
         console.log("Finished dropping tables");
@@ -33,13 +34,35 @@ async function buildTables() {
 
       try {
         await client.query(`
-      CREATE TABLE users (
+        CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         username varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL,
         admin BOOLEAN DEFAULT 'false'
       );
     `);
+
+        console.log("finished user table");
+
+        await client.query(`
+          CREATE TABLE spells (
+            id SERIAL PRIMARY kEY,
+            name varchar(255) UNIQUE NOT NULL,
+            level INTEGER,
+            school TEXT NOT NULL,
+            "attackType" TEXT NOT NULL,
+            "castingTime" TEXT NOT NULL, 
+            range TEXT NOT NULL, 
+            components TEXT ARRAY, 
+            materials TEXT NOT NULL,
+            duration TEXT NOT NULL,
+            ritual BOOLEAN DEFAULT 'false', 
+            classes TEXT ARRAY,
+            subclass TEXT ARRAY,
+            description TEXT NOT NULL,
+            "higherLevels" TEXT ARRAY
+            );`);
+        console.log("finished creating spell table");
 
         console.log("Finished building tables");
       } catch (error) {

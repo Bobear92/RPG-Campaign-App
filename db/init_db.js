@@ -38,7 +38,8 @@ async function buildTables() {
         id SERIAL PRIMARY KEY,
         username varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL,
-        admin BOOLEAN DEFAULT 'false'
+        admin BOOLEAN DEFAULT 'false',
+        gm Boolean Default 'false'
       );
     `);
 
@@ -51,8 +52,10 @@ async function buildTables() {
             level INTEGER,
             school TEXT NOT NULL,
             "attackType" TEXT NOT NULL,
+            "damageType" TEXT NOT NULL,
             "castingTime" TEXT NOT NULL, 
             range TEXT NOT NULL, 
+            concentration BOOLEAN DEFAULT 'false',
             components TEXT ARRAY, 
             materials TEXT NOT NULL,
             duration TEXT NOT NULL,
@@ -60,7 +63,8 @@ async function buildTables() {
             classes TEXT ARRAY,
             subclass TEXT ARRAY,
             description TEXT NOT NULL,
-            "higherLevels" TEXT ARRAY
+            "higherLevels" TEXT ARRAY, 
+            visible BOOLEAN DEFAULT 'false'
             );`);
         console.log("finished creating spell table");
 
@@ -83,8 +87,24 @@ async function populateInitialData() {
       console.log("Starting to create users...");
       try {
         const usersToCreate = [
-          { username: "Robert", password: "Yaraisgreat!", admin: true },
-          { username: "test1", password: "12345678", admin: false },
+          {
+            username: "Admin",
+            password: "12345678",
+            admin: true,
+            gm: false,
+          },
+          {
+            username: "testPlayer",
+            password: "12345678",
+            admin: false,
+            gm: false,
+          },
+          {
+            username: "testGm",
+            password: "12345678",
+            admin: false,
+            gm: true,
+          },
         ];
 
         const users = await Promise.all(usersToCreate.map(createUser));

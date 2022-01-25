@@ -1,17 +1,17 @@
 const { client } = require("./index");
 
-async function createUser({ username, password, admin }) {
+async function createUser({ username, password, admin, gm }) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-          INSERT INTO users(username, password, admin)
-          VALUES($1, $2, $3)
+          INSERT INTO users(username, password, admin, gm)
+          VALUES($1, $2, $3, $4)
           ON CONFLICT (username) DO NOTHING
           RETURNING *;
           `,
-      [username, password, admin]
+      [username, password, admin, gm]
     );
 
     return user.username;

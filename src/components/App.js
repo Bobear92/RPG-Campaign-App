@@ -34,6 +34,7 @@ import { Calendar } from "./Calendar";
 import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
+import { SpellInit } from "./Admin";
 
 const App = () => {
   // Log in stuff
@@ -179,6 +180,9 @@ const App = () => {
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route path="/spell-init">
+            <SpellInit />
           </Route>
         </Switch>
       </Router>

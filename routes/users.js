@@ -29,6 +29,31 @@ usersRouter.get("/", async (req, res, next) => {
   }
 });
 
+usersRouter.post("/", async (req, res, next) => {
+  const { username } = req.body;
+
+  if (!username) {
+    next({
+      name: "MissingCredentialsError",
+      message: "Please supply a username",
+    });
+  }
+  try {
+    const user = await getUserByUsername(username);
+    if (user) {
+      res.send(user);
+    } else {
+      next({
+        name: "IncorrectCredentialsError",
+        message: "Username is incorrect",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   // request must have both

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import "./Header.css";
 import { Login, Register } from ".";
 import { getUser } from "../../auth";
+import { getUserByUsername } from "../../api";
 
 const Header = ({ loggedIn, setLoggedIn }) => {
   const [logToggle, setLogToggle] = useState(false);
@@ -14,11 +15,67 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   const [worldInfoToggle, setWorldInfoToggle] = useState(false);
   const [mechanicsToggle, setMechanicsToggle] = useState(false);
 
+  const [admin, setAdmin] = useState(false);
   const user = getUser();
+
+  const handleUser = async () => {
+    const userName = await getUserByUsername(user);
+    // console.log(userName);
+
+    if (userName.admin) {
+      setAdmin(true);
+    }
+  };
+  useEffect(() => {
+    handleUser();
+  }, []);
+
+  // const TAB_CONTENT = {
+  //   itemPage: <ItemPage />,
+  //   character: <CharacterPage />
+  // }
+
+  // switch(page) {
+  //   case 'character':
+  //     return (
+
+  //     )
+  //       case 'ite,s'
+
+  // }
+
+  // {TAB_CONENT[page]}
+  // nate's stuff
+
+  // console.log(admin);
 
   return (
     <div className="header-main-container">
-      {loggedIn ? (
+      {admin ? (
+        <>
+          <div className="header-top-container">
+            <NavLink className="nav-button" to="/">
+              Home
+            </NavLink>
+            <NavLink
+              className="nav-button"
+              to="/"
+              onClick={() => {
+                localStorage.clear();
+                setLoggedIn(false);
+              }}
+            >
+              Log Out
+            </NavLink>
+          </div>
+          <div className="border"></div>
+          <div className="header-sub-buttons">
+            <NavLink className="nav-button" to="/spell-init">
+              Populate Initial Spells
+            </NavLink>
+          </div>
+        </>
+      ) : loggedIn ? (
         <>
           <div className="header-top-container">
             <NavLink
@@ -30,6 +87,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                 setNarrativeToggle(false);
                 setWorldInfoToggle(false);
                 setMechanicsToggle(false);
+
+                // setPage('item') nate's idea
               }}
             >
               Home

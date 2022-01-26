@@ -19,7 +19,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getToken } from "../auth";
-import { getAllSpells, spellDetails } from "../api";
+import { getAllSpells, spellDetails } from "../api/spells";
 import { Home, Header } from "./Main";
 import {
   CharacterSheet,
@@ -181,9 +181,15 @@ const App = () => {
           <Route path="/settings">
             <Settings />
           </Route>
+          {/* // */}
+          {/* Admin Routes */}
+          {/* // */}
           <Route path="/spell-init">
-            <SpellInit />
+            <SpellInit spellDescriptions={spellDescriptions} />
           </Route>
+          {/* // */}
+          {/* GM Routes */}
+          {/* // */}
         </Switch>
       </Router>
     </>

@@ -41,27 +41,9 @@ export async function getUserByUsername(username) {
   }
 }
 
-export async function getAllSpells() {
-  try {
-    const { data } = await axios.get(`${DnD}spells`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function spellDetails(url) {
-  try {
-    const { data } = await axios.get(`${DnDSpellUrl}${url}`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function acidArrow() {
-  try {
-    const { data } = await axios.get(`${DnDSpellUrl}/api/spells/acid-arrow`);
-    return data;
-  } catch (error) {}
-}
+// export async function acidArrow() {
+//   try {
+//     const { data } = await axios.get(`${DnDSpellUrl}/api/spells/acid-arrow`);
+//     return data;
+//   } catch (error) {}
+// }

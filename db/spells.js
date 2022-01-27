@@ -1,6 +1,6 @@
 const { client } = require("./index");
 
-async function createSpell({
+async function createSpell(
   name,
   level,
   school,
@@ -17,8 +17,8 @@ async function createSpell({
   subclass,
   description,
   higherLevels,
-  visible,
-}) {
+  visible
+) {
   try {
     const {
       rows: [spell],
@@ -55,3 +55,7 @@ async function createSpell({
     throw error;
   }
 }
+
+module.exports = {
+  createSpell,
+};

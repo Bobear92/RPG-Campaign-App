@@ -26,7 +26,7 @@ export async function spellDetails(url) {
 
 // below are spell functions for the personal database
 
-export async function createSpell({
+export async function createSpell(
   name,
   level,
   school,
@@ -43,8 +43,8 @@ export async function createSpell({
   subclass,
   description,
   higherLevels,
-  visible,
-}) {
+  visible
+) {
   try {
     const { data } = await axios.post(`${BASE}spells`, {
       name,
@@ -65,6 +65,7 @@ export async function createSpell({
       higherLevels,
       visible,
     });
+
     return data;
   } catch (error) {
     throw error;

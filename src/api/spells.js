@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE = "http://localhost:5000/api/"; // When in development have this one running
-// const BASE = "/api/"; // when deploying to heroku have this one running
+const BASE = "http://localhost:5000/api/spells/"; // When in development have this one running
+// const BASE = "/api/spells"; // when deploying to heroku have this one running
 const DnD = "https://www.dnd5eapi.co/api/"; // when pulling down from dnd database
 const DnDSpellUrl = "https://www.dnd5eapi.co"; // when getting the spell url to use
 
@@ -45,6 +45,7 @@ export async function createSpell(
   higherLevels,
   visible
 ) {
+  console.log(name);
   try {
     const { data } = await axios.post(`${BASE}spells`, {
       name,
@@ -65,7 +66,8 @@ export async function createSpell(
       higherLevels,
       visible,
     });
-
+    // console.log("can i see this?"); working
+    // console.log(data); coming back as html data
     return data;
   } catch (error) {
     throw error;

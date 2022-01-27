@@ -4,6 +4,7 @@ import { createSpell } from "../../api/spells";
 import { SpellInitButton } from ".";
 
 const SpellInit = ({ spellDescriptions }) => {
+  // console.log(spellDescriptions); this is still working
   const createSpellTable = async () => {
     return await Promise.all(
       spellDescriptions && spellDescriptions.length

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import "./SpellInit.css";
 import { createSpell } from "../../api/spells";
-import { SpellInitButton } from ".";
 
 const SpellInit = ({ spellDescriptions }) => {
   // console.log(spellDescriptions); this is still working
@@ -19,25 +18,39 @@ const SpellInit = ({ spellDescriptions }) => {
               subClassArray.push(eachSubClass.name);
             });
 
-            return createSpell(
-              spell.name,
-              spell.level,
-              spell.school.name,
-              spell.attack_type,
+            const name = spell.name;
+            const level = spell.level;
+            const school = spell.school.name;
+            const attackType =
               !spell.damage || !spell.damage.damage_type
                 ? "no damage type"
-                : spell.damage.damage_type.name,
-              spell.casting_time,
-              spell.range,
-              spell.concentration,
-              spell.components,
-              spell.material,
-              spell.duration,
-              spell.ritual,
+                : spell.damage.damage_type.name;
+            const castingTime = spell.casting_time;
+            const range = spell.range;
+            const concentration = spell.concentration;
+            const components = spell.components;
+            const materials = spell.material;
+            const duration = spell.duration;
+            const ritual = spell.ritual;
+            const description = spell.desc;
+            const higherLevel = spell.higher_level;
+
+            return createSpell(
+              name,
+              level,
+              school,
+              attackType,
+              castingTime,
+              range,
+              concentration,
+              components,
+              materials,
+              duration,
+              ritual,
               classArray,
               subClassArray,
-              spell.desc,
-              spell.higher_level,
+              description,
+              higherLevel,
               true
             );
           })

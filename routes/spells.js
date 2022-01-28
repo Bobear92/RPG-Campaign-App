@@ -47,7 +47,7 @@ spellsRouter.post("/", async (req, res, next) => {
     });
   }
   try {
-    const spell = await createSpell({
+    const spell = await createSpell(
       name,
       level,
       school,
@@ -64,8 +64,8 @@ spellsRouter.post("/", async (req, res, next) => {
       subclass,
       description,
       higherLevels,
-      visible,
-    });
+      visible
+    );
     if (spell) {
       res.send(spell);
     } else {

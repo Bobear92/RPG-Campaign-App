@@ -45,8 +45,10 @@ export async function createSpell(
   higherLevels,
   visible
 ) {
-  // console.log(name);
+  // console log below is working
+  // console.log(description, visible, "api stuff");
   try {
+    // console log below is working
     // console.log("can i see this?");
     const { data } = await axios.post(`${BASE}spells`, {
       name,
@@ -67,8 +69,9 @@ export async function createSpell(
       higherLevels,
       visible,
     });
+    // console log below not working so not getting past the try
     console.log("can i see this?");
-    // console.log(data);
+    console.log(data, "is this data?");
     return data;
   } catch (error) {
     throw error;

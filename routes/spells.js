@@ -22,19 +22,39 @@ spellsRouter.post("/", async (req, res, next) => {
     higherLevels,
     visible,
   } = req.body;
+
+  // console.log("can i see this");
+  // console.log(
+  //   name,
+  //   level,
+  //   school,
+  //   attackType,
+  //   damageType,
+  //   castingTime,
+  //   range,
+  //   concentration,
+  //   components,
+  //   materials,
+  //   duration,
+  //   ritual,
+  //   classes,
+  //   subclass,
+  //   description,
+  //   higherLevels,
+  //   visible,
+  //   "in route "
+  // );
+
   if (
     !name ||
-    !level ||
     !school ||
     !attackType ||
     !damageType ||
     !castingTime ||
     !range ||
-    !concentration ||
     !components ||
     !materials ||
     !duration ||
-    !ritual ||
     !classes ||
     !subclass ||
     !description ||
@@ -45,37 +65,39 @@ spellsRouter.post("/", async (req, res, next) => {
       name: "MissingCredentialsError",
       message: "Please fill out all fields or initial api did not work",
     });
-  }
-  try {
-    const spell = await createSpell(
-      name,
-      level,
-      school,
-      attackType,
-      damageType,
-      castingTime,
-      range,
-      concentration,
-      components,
-      materials,
-      duration,
-      ritual,
-      classes,
-      subclass,
-      description,
-      higherLevels,
-      visible
-    );
-    if (spell) {
-      res.send(spell);
-    } else {
-      next({
-        name: "IncorrectCredentialsError",
-        message: "One of your fields is fucked up man! or the api is fucked up",
-      });
+  } else {
+    try {
+      const spell = await createSpell(
+        name,
+        level,
+        school,
+        attackType,
+        damageType,
+        castingTime,
+        range,
+        concentration,
+        components,
+        materials,
+        duration,
+        ritual,
+        classes,
+        subclass,
+        description,
+        higherLevels,
+        visible
+      );
+      if (spell) {
+        res.send(spell);
+      } else {
+        next({
+          name: "IncorrectCredentialsError",
+          message:
+            "One of your fields is fucked up man! or the api is fucked up",
+        });
+      }
+    } catch ({ name, message }) {
+      next({ name, message });
     }
-  } catch ({ name, message }) {
-    next({ name, message });
   }
 });
 

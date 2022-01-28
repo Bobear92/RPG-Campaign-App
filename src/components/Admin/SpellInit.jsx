@@ -3,7 +3,8 @@ import "./SpellInit.css";
 import { createSpell } from "../../api/spells";
 
 const SpellInit = ({ spellDescriptions }) => {
-  // console.log(spellDescriptions); this is still working
+  // console log below is working
+  // console.log(spellDescriptions);
   const createSpellTable = async () => {
     return await Promise.all(
       spellDescriptions && spellDescriptions.length
@@ -18,28 +19,38 @@ const SpellInit = ({ spellDescriptions }) => {
               subClassArray.push(eachSubClass.name);
             });
 
-            const name = spell.name;
-            const level = spell.level;
-            const school = spell.school.name;
-            const attackType =
+            const name = !spell.name ? "no name" : spell.name;
+            const level = !spell.level ? 0 : spell.level;
+            const school = !spell.school.name ? "no school" : spell.school.name;
+            const attackType = !spell.attack_type
+              ? "no attack type"
+              : spell.attack_type;
+            const damageType =
               !spell.damage || !spell.damage.damage_type
                 ? "no damage type"
                 : spell.damage.damage_type.name;
-            const castingTime = spell.casting_time;
-            const range = spell.range;
-            const concentration = spell.concentration;
-            const components = spell.components;
-            const materials = spell.material;
-            const duration = spell.duration;
-            const ritual = spell.ritual;
-            const description = spell.desc;
-            const higherLevel = spell.higher_level;
+            const castingTime = !spell.casting_time
+              ? "no casting time"
+              : spell.casting_time;
+            const range = !spell.range ? "no range" : spell.range;
+            const concentration = !spell.concentration
+              ? false
+              : spell.concentration;
+            const components = !spell.components ? [] : spell.components;
+            const materials = !spell.material ? "no materials" : spell.material;
+            const duration = !spell.duration ? "no duration" : spell.duration;
+            const ritual = !spell.ritual ? false : spell.ritual;
+            const description = !spell.desc ? ["no description"] : spell.desc;
+            const higherLevels = !spell.higher_level ? [] : spell.higher_level;
+
+            // console.log(higherLevels, "description");
 
             return createSpell(
               name,
               level,
               school,
               attackType,
+              damageType,
               castingTime,
               range,
               concentration,
@@ -50,7 +61,7 @@ const SpellInit = ({ spellDescriptions }) => {
               classArray,
               subClassArray,
               description,
-              higherLevel,
+              higherLevels,
               true
             );
           })

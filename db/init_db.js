@@ -139,7 +139,7 @@ async function populateInitialData() {
         const users = await Promise.all(usersToCreate.map(createUser));
 
         console.log("Users created:");
-        console.log(users);
+        console.log(users, "users");
         console.log("Finished creating users!");
       } catch (error) {
         console.error("Error creating users!");
@@ -178,7 +178,7 @@ async function populateInitialData() {
         ];
         const races = await Promise.all(racesToCreate.map(createRace));
         console.log("Races created:");
-        console.log(races);
+        console.log(races, "races");
         console.log("Finished creating races!");
       } catch (error) {
         console.error("Error creating races!");

@@ -3,9 +3,12 @@ import "./SpellCard.css";
 
 const SpellCard = ({ spell }) => {
   // console.log(spell);
+
+  const name = !spell.name ? "This spell's name is unknown" : spell.name;
+
   return (
     <div>
-      <h3>{spell.name}</h3>
+      <h3>{name}</h3>
     </div>
   );
 };

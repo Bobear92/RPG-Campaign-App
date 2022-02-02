@@ -4,7 +4,7 @@ import { createSpell } from "../../api/spells";
 
 const SpellInit = ({ spellDescriptions }) => {
   // console log below is working
-  // console.log(spellDescriptions);
+  // console.log(spellDescriptions, "in spell init");
   const createSpellTable = async () => {
     return await Promise.all(
       spellDescriptions && spellDescriptions.length
@@ -42,8 +42,7 @@ const SpellInit = ({ spellDescriptions }) => {
             const ritual = !spell.ritual ? false : spell.ritual;
             const description = !spell.desc ? ["no description"] : spell.desc;
             const higherLevels = !spell.higher_level ? [] : spell.higher_level;
-
-            // console.log(higherLevels, "description");
+            const notes = "no spell notes";
 
             return createSpell(
               name,
@@ -62,7 +61,8 @@ const SpellInit = ({ spellDescriptions }) => {
               subClassArray,
               description,
               higherLevels,
-              true
+              true,
+              notes
             );
           })
         : null
@@ -79,5 +79,3 @@ const SpellInit = ({ spellDescriptions }) => {
 };
 
 export default SpellInit;
-
-// key={`Spell in main spell list ${spell.name} ${idx}`}

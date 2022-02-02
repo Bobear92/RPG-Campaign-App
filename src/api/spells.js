@@ -30,9 +30,9 @@ export async function createSpell(
   name,
   level,
   school,
-  attackType,
-  damageType,
-  castingTime,
+  attack_type,
+  damage_type,
+  casting_time,
   range,
   concentration,
   components,
@@ -42,11 +42,12 @@ export async function createSpell(
   classes,
   subclass,
   description,
-  higherLevels,
-  visible
+  higher_levels,
+  visible,
+  gm_notes
 ) {
   // console log below is working
-  // console.log(description, visible, "api stuff");
+  console.log(description, visible, "api stuff");
   try {
     // console log below is working
     // console.log("can i see this?");
@@ -54,9 +55,9 @@ export async function createSpell(
       name,
       level,
       school,
-      attackType,
-      damageType,
-      castingTime,
+      attack_type,
+      damage_type,
+      casting_time,
       range,
       concentration,
       components,
@@ -66,12 +67,22 @@ export async function createSpell(
       classes,
       subclass,
       description,
-      higherLevels,
+      higher_levels,
       visible,
+      gm_notes,
     });
     // console log below not working so not getting past the try
     console.log("can i see this?");
     console.log(data, "is this data?");
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getMySpells() {
+  try {
+    const { data } = await axios.get(`${BASE}spells`);
     return data;
   } catch (error) {
     throw error;

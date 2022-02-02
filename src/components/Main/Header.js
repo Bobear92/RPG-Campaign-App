@@ -16,6 +16,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   const [mechanicsToggle, setMechanicsToggle] = useState(false);
 
   const [admin, setAdmin] = useState(false);
+  const [GM, setGM] = useState(false);
   const user = getUser();
 
   const handleUser = async () => {
@@ -24,6 +25,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
 
     if (userName.admin) {
       setAdmin(true);
+    } else if (userName.gm) {
+      setGM(true);
     }
   };
   useEffect(() => {
@@ -51,7 +54,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
 
   return (
     <div className="header-main-container">
-      {admin ? (
+      {admin && loggedIn ? (
         <>
           <div className="header-top-container">
             <NavLink className="nav-button" to="/">
@@ -72,6 +75,30 @@ const Header = ({ loggedIn, setLoggedIn }) => {
           <div className="header-sub-buttons">
             <NavLink className="nav-button" to="/spell-init">
               Populate Initial Spells
+            </NavLink>
+          </div>
+        </>
+      ) : GM && loggedIn ? (
+        <>
+          <div className="header-top-container">
+            <NavLink className="nav-button" to="/">
+              Home
+            </NavLink>
+            <NavLink
+              className="nav-button"
+              to="/"
+              onClick={() => {
+                localStorage.clear();
+                setLoggedIn(false);
+              }}
+            >
+              Log Out
+            </NavLink>
+          </div>
+          <div className="border"></div>
+          <div className="header-sub-buttons">
+            <NavLink className="nav-button" to="/all-spells-list">
+              All Spells
             </NavLink>
           </div>
         </>

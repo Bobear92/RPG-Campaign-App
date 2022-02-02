@@ -19,7 +19,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getToken } from "../auth";
-import { getAllSpells, spellDetails } from "../api/spells";
+import { getAllSpells, spellDetails, getMySpells } from "../api/spells";
 import { Home, Header } from "./Main";
 import {
   CharacterSheet,
@@ -35,6 +35,7 @@ import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 import { SpellInit } from "./Admin";
+import { AllSpellsList } from "./GM";
 
 const App = () => {
   // Log in stuff
@@ -51,10 +52,31 @@ const App = () => {
   useEffect(() => {
     isUserLoggedIn();
   }, []);
+  // end of log in stuff
 
-  // All of the spell stuff
+  // all the spells from my database
+  const [allMySpells, setAllMySpells] = useState([]);
+
+  const mySpells = async () => {
+    const spells = await getMySpells();
+    if (spells) {
+      setAllMySpells(spells);
+    }
+  };
+  useEffect(() => {
+    mySpells();
+  }, []);
+
+  // below will be empty if database is not populated
+  // console.log(allMySpells, "my spells in app");
+
+  // end of all the spells from my database
+
+  // All of the spell stuff from the 5E api
   const [allSpells, setAllSpells] = useState([]);
   const [spellDescriptions, setSpellDescriptions] = useState([]);
+
+  // look at the if else - if my database is already populated with spells then get spells from there else get spells from 5E api.
 
   const handleSpells = async () => {
     const data = await getAllSpells();
@@ -63,7 +85,11 @@ const App = () => {
       const spellUrl = spell.url;
       return spellUrl;
     });
-    setAllSpells(details);
+    if (allMySpells.length === 0) {
+      setAllSpells(details);
+    } else {
+      setAllSpells([]);
+    }
   };
   useEffect(() => {
     handleSpells();
@@ -76,13 +102,21 @@ const App = () => {
         return spell;
       })
     );
-
-    setSpellDescriptions(data);
+    if (allMySpells.length === 0) {
+      setSpellDescriptions(data);
+    } else {
+      setSpellDescriptions([]);
+    }
   };
 
   useEffect(() => {
     handleSpellDetails();
   }, [allSpells]);
+
+  // console log below should be empty unless my database is not populated with spells
+  // console.log(spellDescriptions, " 5E spells in app");
+
+  // end of 5E api spell stuff
 
   return (
     <>
@@ -107,7 +141,7 @@ const App = () => {
             <SpellList />
           </Route>
           <Route path="/spell-book">
-            <SpellBook spellDescriptions={spellDescriptions} />
+            <SpellBook />
           </Route>
           <Route path="/feats">
             <Feats />
@@ -189,6 +223,9 @@ const App = () => {
           </Route>
           {/* // */}
           {/* GM Routes */}
+          <Route path="/all-spells-list">
+            <AllSpellsList allMySpells={allMySpells} />
+          </Route>
           {/* // */}
         </Switch>
       </Router>

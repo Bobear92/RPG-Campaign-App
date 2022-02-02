@@ -17,12 +17,13 @@ export async function loginUser(username, password) {
   }
 }
 
-export async function registerUser(username, password, admin) {
+export async function registerUser(username, password, admin, gm) {
   try {
     const { data } = await axios.post(`${BASE}users/register`, {
       username,
       password,
       admin,
+      gm,
     });
     return data;
   } catch (error) {
@@ -40,10 +41,3 @@ export async function getUserByUsername(username) {
     throw error;
   }
 }
-
-// export async function acidArrow() {
-//   try {
-//     const { data } = await axios.get(`${DnDSpellUrl}/api/spells/acid-arrow`);
-//     return data;
-//   } catch (error) {}
-// }

@@ -7,6 +7,7 @@ const Register = ({ setLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const admin = false;
+  const gm = false;
 
   return (
     <div className="register-interface-main">
@@ -19,7 +20,8 @@ const Register = ({ setLoggedIn }) => {
             const { token, user } = await registerUser(
               username,
               password,
-              admin
+              admin,
+              gm
             );
             storeToken(token);
             storeUser(user);

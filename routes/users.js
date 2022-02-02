@@ -89,7 +89,7 @@ usersRouter.post("/login", async (req, res, next) => {
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password, admin } = req.body;
+    const { username, password, admin, gm } = req.body;
 
     const queriedUser = await getUserByUsername(username);
 
@@ -110,6 +110,7 @@ usersRouter.post("/register", async (req, res, next) => {
         username,
         password,
         admin,
+        gm,
       });
       if (!user) {
         next({

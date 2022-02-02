@@ -1,15 +1,15 @@
 const express = require("express");
 const spellsRouter = express.Router();
-const { createSpell } = require("../db/spells");
+const { createSpell, getAllMySpells } = require("../db/spells");
 
 spellsRouter.post("/", async (req, res, next) => {
   const {
     name,
     level,
     school,
-    attackType,
-    damageType,
-    castingTime,
+    attack_type,
+    damage_type,
+    casting_time,
     range,
     concentration,
     components,
@@ -19,8 +19,9 @@ spellsRouter.post("/", async (req, res, next) => {
     classes,
     subclass,
     description,
-    higherLevels,
+    higher_levels,
     visible,
+    gm_notes,
   } = req.body;
 
   // console.log("can i see this");
@@ -48,9 +49,9 @@ spellsRouter.post("/", async (req, res, next) => {
   if (
     !name ||
     !school ||
-    !attackType ||
-    !damageType ||
-    !castingTime ||
+    !attack_type ||
+    !damage_type ||
+    !casting_time ||
     !range ||
     !components ||
     !materials ||
@@ -58,8 +59,9 @@ spellsRouter.post("/", async (req, res, next) => {
     !classes ||
     !subclass ||
     !description ||
-    !higherLevels ||
-    !visible
+    !higher_levels ||
+    !visible ||
+    !gm_notes
   ) {
     next({
       name: "MissingCredentialsError",
@@ -71,9 +73,9 @@ spellsRouter.post("/", async (req, res, next) => {
         name,
         level,
         school,
-        attackType,
-        damageType,
-        castingTime,
+        attack_type,
+        damage_type,
+        casting_time,
         range,
         concentration,
         components,
@@ -83,8 +85,9 @@ spellsRouter.post("/", async (req, res, next) => {
         classes,
         subclass,
         description,
-        higherLevels,
-        visible
+        higher_levels,
+        visible,
+        gm_notes
       );
       if (spell) {
         res.send(spell);
@@ -98,6 +101,22 @@ spellsRouter.post("/", async (req, res, next) => {
     } catch ({ name, message }) {
       next({ name, message });
     }
+  }
+});
+
+spellsRouter.get("/", async (req, res, next) => {
+  try {
+    const spells = await getAllMySpells();
+    if (spells) {
+      res.send(spells);
+    } else {
+      res.send({
+        message:
+          "No Spells found in my database either error getting or spells have yet to be populated",
+      });
+    }
+  } catch ({ name, message }) {
+    next({ name, message });
   }
 });
 

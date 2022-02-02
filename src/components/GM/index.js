@@ -1,1 +1,1 @@
-export { default as AllSpells } from "./AllSpells";
+export { default as AllSpellsList } from "./AllSpellsList";

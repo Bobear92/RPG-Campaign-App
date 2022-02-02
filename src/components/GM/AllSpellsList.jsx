@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
+import { SpellCard } from "../Utility";
 
-const AllSpells = () => {
+const AllSpellsList = ({ allMySpells }) => {
+  console.log(allMySpells);
   return (
     <div>
-      <p>
-        This is where a GM can find all the spells in the game. To see, edit,
-        create, or make not visible
-      </p>
+      {allMySpells && allMySpells.length
+        ? allMySpells.map((spell, idx) => {
+            return (
+              <Fragment key={`Spell in main spell list ${spell.name} ${idx}`}>
+                <SpellCard spell={spell} />
+              </Fragment>
+            );
+          })
+        : null}
     </div>
   );
 };
 
-export default AllSpells;
+export default AllSpellsList;
 
 // Below is everything needed to display a spell
 

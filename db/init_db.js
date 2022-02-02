@@ -57,9 +57,9 @@ async function buildTables() {
             name varchar(255) UNIQUE NOT NULL,
             level INTEGER,
             school TEXT NOT NULL,
-            "attackType" TEXT NOT NULL,
-            "damageType" TEXT NOT NULL,
-            "castingTime" TEXT NOT NULL, 
+            attack_type TEXT NOT NULL,
+            damage_type TEXT NOT NULL,
+            casting_time TEXT NOT NULL, 
             range TEXT NOT NULL, 
             concentration BOOLEAN DEFAULT 'false',
             components TEXT ARRAY, 
@@ -69,8 +69,9 @@ async function buildTables() {
             classes TEXT ARRAY,
             subclass TEXT ARRAY,
             description TEXT NOT NULL,
-            "higherLevels" TEXT ARRAY, 
-            visible BOOLEAN DEFAULT 'false'
+            higher_levels TEXT ARRAY, 
+            visible BOOLEAN DEFAULT 'false', 
+            gm_notes TEXT NOT NULL
             );`);
         console.log("finished creating spell table");
 

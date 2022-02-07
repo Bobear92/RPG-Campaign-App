@@ -1,0 +1,21 @@
+.main-spell-card-container {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.spell-card-info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spell-card-item-name {
+  width: 18%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.spell-card-item-level {
+  width: 10%;
+  display: flex;
+  justify-content: flex-start;
+}

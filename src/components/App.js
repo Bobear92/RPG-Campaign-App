@@ -36,6 +36,7 @@ import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 import { SpellInit } from "./Admin";
 import { AllSpellsList } from "./GM";
+import { IndividualSpell } from "./Utility";
 
 const App = () => {
   // Log in stuff
@@ -227,6 +228,11 @@ const App = () => {
             <AllSpellsList allMySpells={allMySpells} />
           </Route>
           {/* // */}
+          {/* Uitility Routes */}
+          {/* // */}
+          <Route path="/individual-spell/:id">
+            <IndividualSpell allMySpells={allMySpells} />
+          </Route>
         </Switch>
       </Router>
     </>

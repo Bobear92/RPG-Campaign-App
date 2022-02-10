@@ -1,1 +1,1 @@
-export { default as SpellInit } from "./SpellInit";
+export { default as APITest } from "./APITest";

@@ -24,28 +24,6 @@ spellsRouter.post("/", async (req, res, next) => {
     gm_notes,
   } = req.body;
 
-  // console.log("can i see this");
-  // console.log(
-  //   name,
-  //   level,
-  //   school,
-  //   attackType,
-  //   damageType,
-  //   castingTime,
-  //   range,
-  //   concentration,
-  //   components,
-  //   materials,
-  //   duration,
-  //   ritual,
-  //   classes,
-  //   subclass,
-  //   description,
-  //   higherLevels,
-  //   visible,
-  //   "in route "
-  // );
-
   if (
     !name ||
     !school ||

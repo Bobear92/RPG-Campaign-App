@@ -19,7 +19,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getToken } from "../auth";
-import { getAllSpells, spellDetails, getMySpells } from "../api/spells";
+import { getMySpells } from "../api/spells";
 import { Home, Header } from "./Main";
 import {
   CharacterSheet,
@@ -34,9 +34,11 @@ import { Calendar } from "./Calendar";
 import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
-import { SpellInit } from "./Admin";
+import { APITest } from "./Admin";
 import { AllSpellsList } from "./GM";
 import { IndividualSpell } from "./Utility";
+
+import { allMonsters, eachMonster } from "../api/monsters";
 
 const App = () => {
   // Log in stuff
@@ -50,9 +52,6 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    isUserLoggedIn();
-  }, []);
   // end of log in stuff
 
   // all the spells from my database
@@ -64,60 +63,49 @@ const App = () => {
       setAllMySpells(spells);
     }
   };
+
+  // end of my spells stuff
+
+  //
+
   useEffect(() => {
+    isUserLoggedIn();
     mySpells();
   }, []);
 
-  // below will be empty if database is not populated
-  // console.log(allMySpells, "my spells in app");
+  // test area
 
-  // end of all the spells from my database
+  const [monsters, setMonsters] = useState([]);
+  const [everyMonster, setEveryMonster] = useState([]);
 
-  // All of the spell stuff from the 5E api
-  const [allSpells, setAllSpells] = useState([]);
-  const [spellDescriptions, setSpellDescriptions] = useState([]);
-
-  // look at the if else - if my database is already populated with spells then get spells from there else get spells from 5E api.
-
-  const handleSpells = async () => {
-    const data = await getAllSpells();
-    const dataResults = data.results;
-    const details = dataResults.map((spell) => {
-      const spellUrl = spell.url;
-      return spellUrl;
-    });
-    if (allMySpells.length === 0) {
-      setAllSpells(details);
-    } else {
-      setAllSpells([]);
+  const monstersData = async () => {
+    try {
+      const monsterData = await allMonsters();
+      setMonsters(monsterData);
+    } catch (error) {
+      throw error;
     }
   };
-  useEffect(() => {
-    handleSpells();
-  }, []);
 
-  const handleSpellDetails = async () => {
-    const data = await Promise.all(
-      allSpells.map(async (spellUrl) => {
-        const spell = await spellDetails(spellUrl);
-        return spell;
+  const details = monsters.map((monster) => {
+    const monsterUrl = monster.url;
+    return monsterUrl;
+  });
+
+  const monsterDescriptionsResponse = async () => {
+    const monsterArray = await Promise.all(
+      details.map((monsterUrl) => {
+        const monster = eachMonster(monsterUrl);
+        return monster;
       })
     );
-    if (allMySpells.length === 0) {
-      setSpellDescriptions(data);
-    } else {
-      setSpellDescriptions([]);
-    }
+    setEveryMonster(monsterArray);
   };
 
   useEffect(() => {
-    handleSpellDetails();
-  }, [allSpells]);
-
-  // console log below should be empty unless my database is not populated with spells
-  // console.log(spellDescriptions, " 5E spells in app");
-
-  // end of 5E api spell stuff
+    monstersData();
+    monsterDescriptionsResponse();
+  }, []);
 
   return (
     <>
@@ -219,8 +207,8 @@ const App = () => {
           {/* // */}
           {/* Admin Routes */}
           {/* // */}
-          <Route path="/spell-init">
-            <SpellInit spellDescriptions={spellDescriptions} />
+          <Route path="/api-test">
+            <APITest everyMonster={everyMonster} />
           </Route>
           {/* // */}
           {/* GM Routes */}
@@ -228,7 +216,7 @@ const App = () => {
             <AllSpellsList allMySpells={allMySpells} />
           </Route>
           {/* // */}
-          {/* Uitility Routes */}
+          {/* Utility Routes */}
           {/* // */}
           <Route path="/individual-spell/:id">
             <IndividualSpell allMySpells={allMySpells} />

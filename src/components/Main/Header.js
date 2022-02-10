@@ -73,8 +73,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
           </div>
           <div className="border"></div>
           <div className="header-sub-buttons">
-            <NavLink className="nav-button" to="/spell-init">
-              Populate Initial Spells
+            <NavLink className="nav-button" to="/api-test">
+              Api Testing
             </NavLink>
           </div>
         </>

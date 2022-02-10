@@ -2,8 +2,6 @@ import axios from "axios";
 
 const BASE = "http://localhost:5000/api/"; // When in development have this one running
 // const BASE = "/api/"; // when deploying to heroku have this one running
-const DnD = "https://www.dnd5eapi.co/api/"; // when pulling down from dnd database
-const DnDSpellUrl = "https://www.dnd5eapi.co"; // when getting the spell url to use
 
 export async function loginUser(username, password) {
   try {

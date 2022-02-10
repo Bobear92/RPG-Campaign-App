@@ -8,6 +8,7 @@
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",
     "seed-spells": "node script/fetchSpellsFromAPI.js",
+    "seed-monsters": "node script/fetchMonstersFromAPI.js",
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/init_db",
     "start": "node index.js"

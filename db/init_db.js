@@ -17,6 +17,7 @@ async function buildTables() {
       try {
         await client.query(`
         DROP TABLE IF EXISTS races;
+        DROP TABLE IF EXISTS monsters;
         DROP TABLE IF EXISTS spells;
         DROP TABLE IF EXISTS users;
       `);
@@ -74,6 +75,47 @@ async function buildTables() {
             gm_notes TEXT NOT NULL
             );`);
         console.log("finished creating spell table");
+
+        // monster table
+        console.log("creating monsters");
+        await client.query(`
+            CREATE TABLE monsters (
+              id SERIAL PRIMARY KEY,
+              name varchar(255) UNIQUE NOT NULL,
+              type TEXT NOT NULL, 
+              size TEXT NOT NULL, 
+              armor_class INTEGER, 
+              hit_points INTEGER, 
+              hit_dice TEXT NOT NULL, 
+              speed TEXT ARRAY, 
+              strength INTEGER, 
+              dexterity INTEGER, 
+              constitution INTEGER, 
+              intelligence INTEGER, 
+              wisdom INTEGER,
+              charisma INTEGER, 
+              senses TEXT ARRAY, 
+              saving_throws TEXT ARRAY, 
+              skills TEXT ARRAY, 
+              languages TEXT NOT NULL, 
+              challenge_rating TEXT NOT NULL, 
+              condition_immunities TEXT ARRAY, 
+              damage_immunities TEXT ARRAY, 
+              damage_resistances TEXT ARRAY, 
+              damage_vulnerabilities TEXT ARRAY, 
+              actions TEXT ARRAY, 
+              legendary_actions TEXT ARRAY, 
+              ability_array TEXT ARRAY, 
+              spell_casting_spell_array TEXT ARRAY, 
+              spell_casting_desc TEXT NOT NULL, 
+              spell_casting_class TEXT NOT NULL, 
+              spell_casting_slots TEXT ARRAY, 
+              xp INTEGER,
+              visible BOOLEAN DEFAULT 'false', 
+              gm_notes TEXT NOT NULL
+            );`);
+
+        console.log("finished creating monsters table");
 
         console.log("creating race tables");
         await client.query(`

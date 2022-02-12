@@ -63,11 +63,11 @@ const APITest = ({ everyMonster }) => {
 
     const xp = monster.xp;
 
-    return special_abilities;
+    return;
   });
 
-  // console.log(everyMonster, "still not working");
-  console.log(monsterMap, "this loop working?");
+  console.log(everyMonster, "just need to work once come on you can do it");
+  // console.log(monsterMap, "this loop working?");
 
   return (
     <div>

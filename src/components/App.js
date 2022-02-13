@@ -38,7 +38,7 @@ import { APITest } from "./Admin";
 import { AllSpellsList } from "./GM";
 import { IndividualSpell } from "./Utility";
 
-import { allMonsters, eachMonster } from "../api/monsters";
+import { getMyMonsters } from "../api/monsters";
 
 const App = () => {
   // Log in stuff
@@ -66,46 +66,25 @@ const App = () => {
 
   // end of my spells stuff
 
-  //
+  //all the monsters from my database
+
+  const [allMyMonsters, setAllMyMonsters] = useState([]);
+
+  const myMonsters = async () => {
+    const monsters = await getMyMonsters();
+    // console.log(monsters);
+    if (monsters) {
+      setAllMyMonsters(monsters);
+    }
+  };
 
   useEffect(() => {
     isUserLoggedIn();
     mySpells();
+    myMonsters();
   }, []);
 
   // test area
-
-  const [monsters, setMonsters] = useState([]);
-  const [everyMonster, setEveryMonster] = useState([]);
-
-  const monstersData = async () => {
-    try {
-      const monsterData = await allMonsters();
-      setMonsters(monsterData);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const details = monsters.map((monster) => {
-    const monsterUrl = monster.url;
-    return monsterUrl;
-  });
-
-  const monsterDescriptionsResponse = async () => {
-    const monsterArray = await Promise.all(
-      details.map((monsterUrl) => {
-        const monster = eachMonster(monsterUrl);
-        return monster;
-      })
-    );
-    setEveryMonster(monsterArray);
-  };
-
-  useEffect(() => {
-    monstersData();
-    monsterDescriptionsResponse();
-  }, []);
 
   return (
     <>
@@ -208,7 +187,7 @@ const App = () => {
           {/* Admin Routes */}
           {/* // */}
           <Route path="/api-test">
-            <APITest everyMonster={everyMonster} />
+            <APITest />
           </Route>
           {/* // */}
           {/* GM Routes */}

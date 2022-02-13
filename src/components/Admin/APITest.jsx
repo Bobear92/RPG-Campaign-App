@@ -1,73 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { eachMonster, allMonsters } from "../../api/monsters";
 
-const APITest = ({ everyMonster }) => {
-  const monsterMap = everyMonster.map((monster) => {
-    const name = monster.name;
-    const type = monster.type;
-    const size = monster.size;
-    const armor_class = monster.armor_class;
-    const hit_points = monster.hit_points;
-    const hit_dice = monster.hit_dice;
+const APITest = () => {
+  // data to look at all the monsters on the api data
+  const [monsters, setMonsters] = useState([]);
+  const [everyMonster, setEveryMonster] = useState([]);
 
-    const speed = [];
-    for (const speedType in monster.speed) {
-      speed.push(`${speedType}: ${monster.speed[speedType]}`);
+  const monstersData = async () => {
+    try {
+      const monsterData = await allMonsters();
+      setMonsters(monsterData);
+    } catch (error) {
+      throw error;
     }
+  };
 
-    const strength = monster.strength;
-    const dexterity = monster.dexterity;
-    const constitution = monster.constitution;
-    const intelligence = monster.intelligence;
-    const wisdom = monster.wisdom;
-    const charisma = monster.charisma;
-
-    // saving throws and skills need work
-    // const saving_throws = [];
-
-    // monster.proficiencies.map((object) => {
-    //   for (const key in object) {
-    //     if (key.name.startsWith("Saving")) {
-    //       const value = 0;
-    //       if (key == value) {
-    //         value += key;
-    //       }
-    //       saving_throws.push(`${key.name}: ${value}`);
-    //     }
-    //   }
-    // });
-
-    const senses = [];
-    for (const sense in monster.senses) {
-      senses.push(`${sense}: ${monster.senses[sense]}`);
-    }
-
-    const languages = monster.languages;
-    const challenge_rating = monster.challenge_rating;
-
-    const condition_immunities = [];
-    for (const immunity in monster.condition_immunities) {
-      condition_immunities.push(monster.condition_immunities[immunity].name);
-    }
-    const damage_immunities = monster.damage_immunities;
-    const damage_resistances = monster.damage_resistances;
-    const damage_vulnerabilities = monster.damage_vulnerabilities;
-
-    const special_abilities = [];
-
-    for (const ability in monster.special_abilities) {
-      special_abilities.push(monster.special_abilities[ability].name);
-    }
-
-    const actions = [];
-
-    const xp = monster.xp;
-
-    return;
+  const details = monsters.map((monster) => {
+    const monsterUrl = monster.url;
+    return monsterUrl;
   });
 
-  console.log(everyMonster, "just need to work once come on you can do it");
-  // console.log(monsterMap, "this loop working?");
+  const monsterDescriptionsResponse = async () => {
+    const monsterArray = await Promise.all(
+      details.map((monsterUrl) => {
+        const monster = eachMonster(monsterUrl);
+        return monster;
+      })
+    );
+    setEveryMonster(monsterArray);
+  };
+
+  useEffect(() => {
+    monstersData();
+    monsterDescriptionsResponse();
+  }, []);
+
+  console.log(everyMonster);
 
   return (
     <div>

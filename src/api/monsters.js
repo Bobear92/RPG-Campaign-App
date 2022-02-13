@@ -6,6 +6,7 @@ const BASE = "http://localhost:5000/api/"; // When in development have this one 
 const DnD = "https://www.dnd5eapi.co/api/"; // when pulling down from dnd database
 const DnDUrl = "https://www.dnd5eapi.co"; // when getting the spell url to use
 
+// 5E api
 export async function allMonsters() {
   try {
     const { data } = await axios.get(`${DnD}monsters`);
@@ -18,6 +19,16 @@ export async function allMonsters() {
 export async function eachMonster(url) {
   try {
     const { data } = await axios.get(`${DnDUrl}${url}`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// my database
+export async function getMyMonsters() {
+  try {
+    const { data } = await axios.get(`${BASE}monsters`);
     return data;
   } catch (error) {
     throw error;

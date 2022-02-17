@@ -28,6 +28,10 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
   });
 
   const senses = monster.senses;
+  const conditional = monster.condition_immunities;
+  const damage = monster.damage_immunities;
+  const resistance = monster.damage_resistances;
+  const vulnerability = monster.damage_vulnerabilities;
   const languages = monster.languages;
   const challenge = monster.challenge_rating;
   const xp = monster.xp;
@@ -40,6 +44,7 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
   const slots = monster.spell_casting_slots;
   const spells = monster.spell_casting_spell_array;
   const actions = monster.actions;
+  const legendary = monster.legendary_actions;
   const gmNotes =
     monster.gm_notes === "no monster notes"
       ? "No Dungeon Master Notes on this monster."
@@ -207,6 +212,56 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
             {senses.map((data, idx) => {
               return (
                 <p key={`data in senses map: ${data} at ${idx}`}>{data}</p>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {conditional.length ? (
+          <div className="individual-monster-skills">
+            {conditional.map((data, idx) => {
+              return (
+                <p
+                  key={`data in conditional immunities map: ${data} at ${idx}`}
+                >
+                  Conditional Immunities: {data}
+                </p>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {damage.length ? (
+          <div className="individual-monster-skills">
+            {damage.map((data, idx) => {
+              return (
+                <p key={`data in damage immunities map: ${data} at ${idx}`}>
+                  Damage Immunities: {data}
+                </p>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {resistance.length ? (
+          <div className="individual-monster-skills">
+            {resistance.map((data, idx) => {
+              return (
+                <p key={`data in damage resistance map: ${data} at ${idx}`}>
+                  Damage Resistances: {data}
+                </p>
+              );
+            })}
+          </div>
+        ) : null}
+
+        {vulnerability.length ? (
+          <div className="individual-monster-skills">
+            {vulnerability.map((data, idx) => {
+              return (
+                <p key={`data in damage vulnerability map: ${data} at ${idx}`}>
+                  Damage vulnerabilities: {data}
+                </p>
               );
             })}
           </div>
@@ -403,6 +458,20 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
           );
         })}
       </div>
+      <div className="individual-monster-border"></div>
+      {legendary[0] != "no legendary actions" ? (
+        <div className="individual-monster-legendary-actions-container">
+          <h2>Legendary Actions</h2>
+          {legendary.map((data, idx) => {
+            return (
+              <p key={`data in legendary actions map: ${data} at ${idx}`}>
+                {data}
+              </p>
+            );
+          })}
+        </div>
+      ) : null}
+
       <div className="individual-monster-border"></div>
       {GM ? (
         <div className="individual-monster-gm-container">

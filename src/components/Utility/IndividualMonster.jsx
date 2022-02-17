@@ -40,6 +40,13 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
   const slots = monster.spell_casting_slots;
   const spells = monster.spell_casting_spell_array;
   const actions = monster.actions;
+  const gmNotes =
+    monster.gm_notes === "no monster notes"
+      ? "No Dungeon Master Notes on this monster."
+      : monster.gm_notes;
+  const visible = monster.visible
+    ? "Players can see this monster."
+    : "This monster is hidden from players.";
 
   const modifierFunction = (mod) => {
     return mod === 1
@@ -396,6 +403,13 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
           );
         })}
       </div>
+      <div className="individual-monster-border"></div>
+      {GM ? (
+        <div className="individual-monster-gm-container">
+          <p>Dungeon Master Notes: {gmNotes}</p>
+          <p>Visible: {visible}</p>
+        </div>
+      ) : null}
     </div>
   );
 };

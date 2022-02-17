@@ -69,9 +69,11 @@ const SpellCard = ({ spell }) => {
     <div className="main-spell-card-container">
       <div className="spell-card-info-container">
         <span className="spell-card-school-image">{school}</span>
-        <Link to={`/individual-spell/${spell.id}`}>
-          <h4 className="spell-card-item-name">{name}</h4>
-        </Link>
+        <div className="spell-card-name-container">
+          <Link to={`/individual-spell/${spell.id}`}>
+            <h4 className="spell-card-item-name">{name}</h4>
+          </Link>
+        </div>
         <h4 className="spell-card-item-level">Level: {level}</h4>
         <h4 className="spell-card-item-time">Casting Time: {casting_time}</h4>
         <h4 className="spell-card-item-duration">Duration: {duration}</h4>

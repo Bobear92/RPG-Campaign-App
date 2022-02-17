@@ -1,0 +1,10 @@
+.main-monster-card-container {
+  border: 1px solid black;
+  width: 95%;
+  margin: 2%;
+}
+
+.monster-card-info-container {
+  display: flex;
+  justify-content: space-between;
+}

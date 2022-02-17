@@ -18,7 +18,8 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { getToken } from "../auth";
+import { getToken, getUser } from "../auth";
+import { getUserByUsername } from "../api";
 import { getMySpells } from "../api/spells";
 import { Home, Header } from "./Main";
 import {
@@ -35,8 +36,8 @@ import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 import { APITest } from "./Admin";
-import { AllSpellsList } from "./GM";
-import { IndividualSpell } from "./Utility";
+import { AllSpellsList, AllMonstersList } from "./GM";
+import { IndividualSpell, IndividualMonster } from "./Utility";
 
 import { getMyMonsters } from "../api/monsters";
 
@@ -53,6 +54,24 @@ const App = () => {
   }
 
   // end of log in stuff
+
+  // user info stuff
+
+  const [admin, setAdmin] = useState(false);
+  const [GM, setGM] = useState(false);
+  const user = getUser();
+
+  const handleUser = async () => {
+    const userName = await getUserByUsername(user);
+
+    if (userName.admin) {
+      setAdmin(true);
+    } else if (userName.gm) {
+      setGM(true);
+    }
+  };
+
+  // end user info stuff
 
   // all the spells from my database
   const [allMySpells, setAllMySpells] = useState([]);
@@ -80,6 +99,7 @@ const App = () => {
 
   useEffect(() => {
     isUserLoggedIn();
+    handleUser();
     mySpells();
     myMonsters();
   }, []);
@@ -194,11 +214,21 @@ const App = () => {
           <Route path="/all-spells-list">
             <AllSpellsList allMySpells={allMySpells} />
           </Route>
+          <Route path="/all-monsters-list">
+            <AllMonstersList allMyMonsters={allMyMonsters} />
+          </Route>
           {/* // */}
           {/* Utility Routes */}
           {/* // */}
           <Route path="/individual-spell/:id">
-            <IndividualSpell allMySpells={allMySpells} />
+            <IndividualSpell allMySpells={allMySpells} GM={GM} />
+          </Route>
+          <Route path="/individual-monster/:id">
+            <IndividualMonster
+              allMyMonsters={allMyMonsters}
+              GM={GM}
+              allMySpells={allMySpells}
+            />
           </Route>
         </Switch>
       </Router>

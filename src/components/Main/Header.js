@@ -33,25 +33,6 @@ const Header = ({ loggedIn, setLoggedIn }) => {
     handleUser();
   }, []);
 
-  // const TAB_CONTENT = {
-  //   itemPage: <ItemPage />,
-  //   character: <CharacterPage />
-  // }
-
-  // switch(page) {
-  //   case 'character':
-  //     return (
-
-  //     )
-  //       case 'ite,s'
-
-  // }
-
-  // {TAB_CONENT[page]}
-  // nate's stuff
-
-  // console.log(admin);
-
   return (
     <div className="header-main-container">
       {admin && loggedIn ? (
@@ -97,9 +78,14 @@ const Header = ({ loggedIn, setLoggedIn }) => {
           </div>
           <div className="border"></div>
           <div className="header-sub-buttons">
-            <NavLink className="nav-button" to="/all-spells-list">
-              All Spells
-            </NavLink>
+            <div className="header-sub-button-links">
+              <NavLink className="nav-button" to="/all-spells-list">
+                All Spells
+              </NavLink>
+              <NavLink className="nav-button" to="/all-monsters-list">
+                All Monsters
+              </NavLink>
+            </div>
           </div>
         </>
       ) : loggedIn ? (
@@ -318,3 +304,21 @@ const Header = ({ loggedIn, setLoggedIn }) => {
 };
 
 export default Header;
+
+// nate's stuff
+
+// const TAB_CONTENT = {
+//   itemPage: <ItemPage />,
+//   character: <CharacterPage />
+// }
+
+// switch(page) {
+//   case 'character':
+//     return (
+
+//     )
+//       case 'ite,s'
+
+// }
+
+// {TAB_CONENT[page]}

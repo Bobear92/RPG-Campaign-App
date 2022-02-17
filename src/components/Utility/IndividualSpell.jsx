@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getUser } from "../../auth";
-import { getUserByUsername } from "../../api";
 
-const IndividualSpell = ({ allMySpells }) => {
-  const [admin, setAdmin] = useState(false);
-  const [GM, setGM] = useState(false);
-  const user = getUser();
+import "./IndividualSpell.css";
 
-  const handleUser = async () => {
-    const userName = await getUserByUsername(user);
-    // console.log(userName);
-
-    if (userName.admin) {
-      setAdmin(true);
-    } else if (userName.gm) {
-      setGM(true);
-    }
-  };
-  useEffect(() => {
-    handleUser();
-  }, []);
-
+const IndividualSpell = ({ allMySpells, GM }) => {
   const { id } = useParams();
   const spell = allMySpells.find((element) => element.id == id);
   console.log(spell);

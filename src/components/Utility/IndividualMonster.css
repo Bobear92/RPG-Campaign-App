@@ -1,0 +1,38 @@
+.individual-monster-border {
+  border: 1px solid black;
+}
+
+.individual-monster-stat-speed {
+  display: flex;
+}
+
+.individual-monster-stat-speed-map {
+  margin: 1em;
+}
+
+.individual-monster-ability-container {
+  display: flex;
+  margin: 1em;
+}
+
+.individual-monster-ability {
+  margin: 1em;
+}
+
+.individual-monster-skills-container {
+  display: flex;
+  margin: 1em;
+}
+
+.individual-monster-skills {
+  margin: 2em;
+}
+
+.individual-monster-spellcasting-spell-slot {
+  display: flex;
+}
+
+.individual-monster-spellcasting-spell {
+  display: flex;
+  margin-left: 1em;
+}

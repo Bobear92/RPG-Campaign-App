@@ -1,6 +1,6 @@
 // Connect to DB
 const { Client } = require("pg");
-require("dotenv").config();
+require("dotenv").config(); // this code allows us to use process .env. Anything that uses client uses this. So anywhere else you use .env outside of client you need this
 
 const DB_NAME = "RPG-Data";
 const DB_URL =

@@ -2,6 +2,42 @@
   border: 1px solid black;
 }
 
+/* name */
+.individual-monster-name-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
+.individual-monster-name-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.individual-monster-size-type {
+  margin-top: 0.1em;
+  display: flex;
+  justify-content: center;
+}
+
+/* stats and ability*/
+
+.individual-monster-stats-and-ability-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.individual-monster-stats-container {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.individual-monster-stats-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .individual-monster-stat-speed {
   display: flex;
 }
@@ -13,19 +49,24 @@
 .individual-monster-ability-container {
   display: flex;
   margin: 1em;
+  justify-content: center;
 }
 
 .individual-monster-ability {
   margin: 1em;
 }
 
+/* skills*/
+
 .individual-monster-skills-container {
   display: flex;
   margin: 1em;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .individual-monster-skills {
-  margin: 2em;
+  margin: 1em;
 }
 
 .individual-monster-spellcasting-spell-slot {

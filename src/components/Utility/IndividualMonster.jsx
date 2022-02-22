@@ -119,69 +119,75 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
 
   return (
     <div className="individual-monster-main-container">
+      <div className="individual-monster-border"></div>
       <div className="individual-monster-name-container">
-        <h1 className="individual-monster-name">{name}</h1>
-        <p className="individual-monster-sizeType">
-          {size}, {type}
-        </p>
-      </div>
-      <div className="individual-monster-border"></div>
-      <div className="individual-monster-stats-container">
-        <p className="individual-monster-stat">Armor Class: {AC}</p>
-        <p className="individual-monster-stat">
-          Hit Points: {HP} ({die})
-        </p>
-        <div className="individual-monster-stat-speed">
-          <p>Speed:</p>
-          {speed.map((data, idx) => {
-            return (
-              <p
-                key={`data in speed map: ${data} at ${idx}`}
-                className={"individual-monster-stat-speed-map"}
-              >
-                {data}
-              </p>
-            );
-          })}
+        <div className="individual-monster-name-inner-container">
+          <h1 className="individual-monster-name">{name}</h1>
+          <p className="individual-monster-size-type">
+            {size}, {type}
+          </p>
         </div>
       </div>
       <div className="individual-monster-border"></div>
-      <div className="individual-monster-ability-container">
-        <div className="individual-monster-ability">
-          <p>Str</p>
-          <p>
-            {str} ({modifierFunction(str)})
-          </p>
+      <div className="individual-monster-stats-and-ability-container">
+        <div className="individual-monster-stats-container">
+          <div className="individual-monster-stats-inner-container">
+            <p className="individual-monster-stat">Armor Class: {AC}</p>
+            <p className="individual-monster-stat">
+              Hit Points: {HP} ({die})
+            </p>
+            <div className="individual-monster-stat-speed">
+              <p>Speed:</p>
+              {speed.map((data, idx) => {
+                return (
+                  <p
+                    key={`data in speed map: ${data} at ${idx}`}
+                    className={"individual-monster-stat-speed-map"}
+                  >
+                    {data}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <div className="individual-monster-ability">
-          <p>Dex</p>
-          <p>
-            {dex} ({modifierFunction(dex)})
-          </p>
-        </div>
-        <div className="individual-monster-ability">
-          <p>Con</p>
-          <p>
-            {con} ({modifierFunction(con)})
-          </p>
-        </div>
-        <div className="individual-monster-ability">
-          <p>Int</p>
-          <p>
-            {int} ({modifierFunction(int)})
-          </p>
-        </div>
-        <div className="individual-monster-ability">
-          <p>Wis</p>
-          <p>
-            {wis} ({modifierFunction(wis)})
-          </p>
-        </div>
-        <div className="individual-monster-ability">
-          <p>Cha</p>
-          <p>
-            {cha} ({modifierFunction(cha)})
-          </p>
+        <div className="individual-monster-ability-container">
+          <div className="individual-monster-ability">
+            <p>Str</p>
+            <p>
+              {str} ({modifierFunction(str)})
+            </p>
+          </div>
+          <div className="individual-monster-ability">
+            <p>Dex</p>
+            <p>
+              {dex} ({modifierFunction(dex)})
+            </p>
+          </div>
+          <div className="individual-monster-ability">
+            <p>Con</p>
+            <p>
+              {con} ({modifierFunction(con)})
+            </p>
+          </div>
+          <div className="individual-monster-ability">
+            <p>Int</p>
+            <p>
+              {int} ({modifierFunction(int)})
+            </p>
+          </div>
+          <div className="individual-monster-ability">
+            <p>Wis</p>
+            <p>
+              {wis} ({modifierFunction(wis)})
+            </p>
+          </div>
+          <div className="individual-monster-ability">
+            <p>Cha</p>
+            <p>
+              {cha} ({modifierFunction(cha)})
+            </p>
+          </div>
         </div>
       </div>
       <div className="individual-monster-border"></div>

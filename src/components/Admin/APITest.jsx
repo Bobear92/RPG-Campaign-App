@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { eachMonster, allMonsters } from "../../api/monsters";
+import { eachItem, allEquipment } from "../../api/equipment";
 
 const APITest = () => {
-  // data to look at all the monsters on the api data
-  const [monsters, setMonsters] = useState([]);
-  const [everyMonster, setEveryMonster] = useState([]);
+  // data to look at all the equipment on the api data
+  const [equipment, setEquipment] = useState([]);
+  const [everyItem, setEveryItem] = useState([]);
 
-  const monstersData = async () => {
+  const equipmentData = async () => {
     try {
-      const monsterData = await allMonsters();
-      setMonsters(monsterData);
+      const equipmentData = await allEquipment();
+      setEquipment(equipmentData);
     } catch (error) {
       throw error;
     }
   };
 
-  const details = monsters.map((monster) => {
-    const monsterUrl = monster.url;
-    return monsterUrl;
+  const details = equipment.map((item) => {
+    const itemUrl = item.url;
+    return itemUrl;
   });
 
-  const monsterDescriptionsResponse = async () => {
-    const monsterArray = await Promise.all(
-      details.map((monsterUrl) => {
-        const monster = eachMonster(monsterUrl);
-        return monster;
+  const equipmentDescriptionsResponse = async () => {
+    const equipmentArray = await Promise.all(
+      details.map((itemUrl) => {
+        const item = eachItem(itemUrl);
+        return item;
       })
     );
-    setEveryMonster(monsterArray);
+    setEveryItem(equipmentArray);
   };
 
   useEffect(() => {
-    monstersData();
-    monsterDescriptionsResponse();
+    equipmentData();
+    equipmentDescriptionsResponse();
   }, []);
 
-  console.log(everyMonster);
+  console.log(everyItem);
 
   return (
     <div>
@@ -45,3 +45,38 @@ const APITest = () => {
 };
 
 export default APITest;
+
+//  // data to look at all the monsters on the api data
+//  const [monsters, setMonsters] = useState([]);
+//  const [everyMonster, setEveryMonster] = useState([]);
+
+//  const monstersData = async () => {
+//    try {
+//      const monsterData = await allMonsters();
+//      setMonsters(monsterData);
+//    } catch (error) {
+//      throw error;
+//    }
+//  };
+
+//  const details = monsters.map((monster) => {
+//    const monsterUrl = monster.url;
+//    return monsterUrl;
+//  });
+
+//  const monsterDescriptionsResponse = async () => {
+//    const monsterArray = await Promise.all(
+//      details.map((monsterUrl) => {
+//        const monster = eachMonster(monsterUrl);
+//        return monster;
+//      })
+//    );
+//    setEveryMonster(monsterArray);
+//  };
+
+//  useEffect(() => {
+//    monstersData();
+//    monsterDescriptionsResponse();
+//  }, []);
+
+//  console.log(everyMonster);

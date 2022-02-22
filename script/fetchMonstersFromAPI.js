@@ -12,7 +12,7 @@ async function eachMonster(url) {
   }
 }
 
-//a copy of the createMonster function from db/monsters.js, but returns the promise instead of awaiting the data
+//a copy of createMonster function from db/monsters.js, but returns the promise instead of awaiting the data
 //this is so we aren't trying to use await inside of a map (which is not a good idea!)
 async function createMonster(
   name,

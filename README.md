@@ -101,4 +101,10 @@ heroku run npm run db:build
 
 Which will run `npm run db:build` on the heroku server.
 
+If you want to populate scripts run these below
+
+```bash
+heroku run npm run seed-spells
+```
+
 Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.

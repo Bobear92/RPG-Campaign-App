@@ -1,5 +1,7 @@
 // Connect to DB
 const { Client } = require("pg");
+require("dotenv").config();
+
 const DB_NAME = "RPG-Data";
 const DB_URL =
   process.env.DATABASE_URL || `postgres://postgres@localhost:5432/${DB_NAME}`;

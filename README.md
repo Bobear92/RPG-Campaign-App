@@ -103,8 +103,22 @@ Which will run `npm run db:build` on the heroku server.
 
 If you want to populate scripts run these below
 
+These ones for first time database populations or if you need to wipe a whole category back to basics
+
+Spells:
+
 ```bash
 heroku run npm run seed-spells
 ```
+
+Monsters:
+
+```bash
+heroku run npm run seed-monsters
+```
+
+These ones for re-deploying with data pulled down from current site
+
+stuff
 
 Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.

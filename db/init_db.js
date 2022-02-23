@@ -17,6 +17,7 @@ async function buildTables() {
       try {
         await client.query(`
         DROP TABLE IF EXISTS races;
+        DROP TABLE IF EXISTS equipment;
         DROP TABLE IF EXISTS monsters;
         DROP TABLE IF EXISTS spells;
         DROP TABLE IF EXISTS users;
@@ -116,6 +117,32 @@ async function buildTables() {
             );`);
 
         console.log("finished creating monsters table");
+
+        // equipment table
+        console.log("creating equipment table");
+
+        await client.query(`
+          CREATE TABLE equipment (
+            id SERIAL PRIMARY KEY,
+            name varchar(255) UNIQUE NOT NULL,
+            description TEXT ARRAY, 
+            cost TEXT ARRAY,
+            weight TEXT, 
+            item_type TEXT NOT NULL, 
+            gear_cat TEXT, 
+            weapon_cat TEXT,
+            damage TEXT ARRAY,
+            range_type TEXT, 
+            range TEXT ARRAY,
+            properties TEXT ARRAY,
+            speed TEXT ARRAY,
+            carrying_capacity TEXT,
+            visible BOOLEAN DEFAULT 'false', 
+            gm_notes TEXT NOT NULL
+          )
+        `);
+
+        console.log("finished creating equipment table");
 
         console.log("creating race tables");
         await client.query(`

@@ -35,7 +35,7 @@ const APITest = () => {
     equipmentDescriptionsResponse();
   }, []);
 
-  console.log(everyItem);
+  console.log(everyItem, "you can do it");
 
   return (
     <div>

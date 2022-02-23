@@ -15,13 +15,45 @@ async function eachItem(url) {
 //a copy of createItem function from db/equipment.js, but returns the promise instead of awaiting the data
 //this is so we aren't trying to use await inside of a map (which is not a good idea!)
 
-async function createItem(name, cost) {
+async function createItem(
+  name,
+  description,
+  cost,
+  weight,
+  item_type,
+  gear_cat,
+  weapon_cat,
+  damage,
+  range_type,
+  range,
+  properties,
+  speed,
+  carrying_capacity,
+  visible,
+  gm_notes
+) {
   try {
     return client.query(
-      `INSERT INTO equipment(name, cost)
-          VALUES($1, $2)
+      `INSERT INTO equipment(name, description, cost, weight, item_type, gear_cat, weapon_cat, damage, range_type, range, properties, speed, carrying_capacity, visible, gm_notes)
+          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
           RETURNING *;`,
-      []
+      [
+        name,
+        description,
+        cost,
+        weight,
+        item_type,
+        gear_cat,
+        weapon_cat,
+        damage,
+        range_type,
+        range,
+        properties,
+        speed,
+        carrying_capacity,
+        visible,
+        gm_notes,
+      ]
     );
   } catch (error) {
     throw error;
@@ -52,11 +84,51 @@ const createEquipmentTable = async () => {
     //map over the resolved responses and pull out the data. This gives us an array of the item objects
 
     const equipmentPromises = equipmentDescriptions.map((item, idx) => {
-      const name = item.name;
-      const cost = [item.cost.quantity, item.cost.unit];
-      console.log(cost);
+      const name = item.name; // string
+      const description = [];
+      item.desc && item.desc.length
+        ? item.desc.map((desc) => {
+            description.push(desc);
+          })
+        : null; // array
+      const cost = [item.cost.quantity, item.cost.unit]; // array
+      const weight = item.weight ? item.weight : null; // string instead
+      const item_type = item.equipment_category.name; // string
+      const gear_cat = item.gear_category ? item.gear_category.name : null; //string
+      const weapon_cat = item.weapon_category ? item.weapon_category : null; // string
+      const damage = item.damage
+        ? [item.damage.damage_type.name, item.damage.damage_dice]
+        : null; // array
+      const range_type = item.weapon_range ? item.weapon_range : null; //string
+      const range = item.range ? [item.range.normal, item.range.long] : null; // array
+      const properties = [];
+      item.properties && item.properties.length
+        ? item.properties.map((property) => {
+            properties.push(property.name);
+          })
+        : null; // array
 
-      //   return createItem(name, cost);
+      const speed = item.speed ? [item.speed.unit, item.speed.quantity] : null; // array
+      const carrying_capacity = item.capacity ? item.capacity : null; // string
+      const notes = "no equipment notes"; // string
+
+      return createItem(
+        name,
+        description,
+        cost,
+        weight,
+        item_type,
+        gear_cat,
+        weapon_cat,
+        damage,
+        range_type,
+        range,
+        properties,
+        speed,
+        carrying_capacity,
+        true,
+        notes
+      );
     });
 
     await Promise.all(equipmentPromises);

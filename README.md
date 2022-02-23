@@ -117,6 +117,12 @@ Monsters:
 heroku run npm run seed-monsters
 ```
 
+Equipment:
+
+```bash
+heroku run npm run seed-equipment
+```
+
 These ones for re-deploying with data pulled down from current site
 
 stuff

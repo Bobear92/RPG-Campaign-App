@@ -89,11 +89,19 @@ It will also create a postgres database for you, on the free tier.
 
 ### Deploying
 
-Once you've built the front-end you're ready to deploy, simply run `git push heroku main`. Note, your git has to be clean for this to work (which is why our two git commands live as part of getting ready to deploy, above).
+1: Switch over all urls in src/api or nothing will work!
+
+2: Deploy all in wsl terminal
+
+3: Log into heroku first with `heroku login`
+
+4: Once you've built the front-end you're ready to deploy, simply run `git push heroku main`. Note, your git has to be clean for this to work (which is why our two git commands live as part of getting ready to deploy, above).
 
 This will send off the new code to heroku, will install the node modules on their server, and will run `npm start`, starting up your express server.
 
 If you need to rebuild your database on heroku, you can do so right now with this command:
+
+5:
 
 ```bash
 heroku run npm run db:build
@@ -101,6 +109,7 @@ heroku run npm run db:build
 
 Which will run `npm run db:build` on the heroku server.
 
+6:
 If you want to populate scripts run these below
 
 These ones for first time database populations or if you need to wipe a whole category back to basics
@@ -123,6 +132,7 @@ Equipment:
 heroku run npm run seed-equipment
 ```
 
+7:
 These ones for re-deploying with data pulled down from current site
 
 stuff

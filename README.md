@@ -89,7 +89,7 @@ It will also create a postgres database for you, on the free tier.
 
 ### Deploying
 
-1: Switch over all urls in src/api or nothing will work!
+1: Switch over all urls in src/api or nothing will work! Then push to git hub
 
 2: Deploy all in wsl terminal
 
@@ -137,4 +137,6 @@ These ones for re-deploying with data pulled down from current site
 
 stuff
 
-Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
+8: Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
+
+9: Switch the url's back to development in src/api then push back to git hub

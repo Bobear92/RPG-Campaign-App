@@ -1,0 +1,10 @@
+.main-equipment-card-container {
+  border: 1px solid black;
+  width: 95%;
+  margin: 2%;
+}
+
+.equipment-card-info-container {
+  display: flex;
+  justify-content: space-between;
+}

@@ -24,3 +24,13 @@ export async function eachItem(url) {
     throw error;
   }
 }
+
+// my database
+export async function getMyEquipment() {
+  try {
+    const { data } = await axios.get(`${BASE}equipment`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

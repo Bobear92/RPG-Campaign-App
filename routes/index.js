@@ -56,4 +56,7 @@ apiRouter.use("/spells", spellsRouter);
 const monstersRouter = require("./monsters");
 apiRouter.use("/monsters", monstersRouter);
 
+const equipmentRouter = require("./equipment");
+apiRouter.use("/equipment", equipmentRouter);
+
 module.exports = apiRouter;

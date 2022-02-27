@@ -85,6 +85,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
               <NavLink className="nav-button" to="/all-monsters-list">
                 All Monsters
               </NavLink>
+              <NavLink className="nav-button" to="/all-equipment-list">
+                All Equipment
+              </NavLink>
             </div>
           </div>
         </>

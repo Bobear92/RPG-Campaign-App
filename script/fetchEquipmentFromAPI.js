@@ -24,9 +24,16 @@ async function createItem(
   gear_cat,
   weapon_cat,
   damage,
+  two_handed_damage,
   range_type,
   range,
   properties,
+  armor_cat,
+  ac_base,
+  ac_dex,
+  ac_max_dex_bonus,
+  stealth_dis,
+  str_min,
   speed,
   carrying_capacity,
   visible,
@@ -34,8 +41,9 @@ async function createItem(
 ) {
   try {
     return client.query(
-      `INSERT INTO equipment(name, description, cost, weight, item_type, gear_cat, weapon_cat, damage, range_type, range, properties, speed, carrying_capacity, visible, gm_notes)
-          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+      `INSERT INTO equipment(name, description, cost, weight, item_type, gear_cat, weapon_cat, damage, two_handed_damage, range_type, range, properties, armor_cat, ac_base, 
+        ac_dex, ac_max_dex_bonus, stealth_dis, str_min, speed, carrying_capacity, visible, gm_notes)
+          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
           RETURNING *;`,
       [
         name,
@@ -46,9 +54,16 @@ async function createItem(
         gear_cat,
         weapon_cat,
         damage,
+        two_handed_damage,
         range_type,
         range,
         properties,
+        armor_cat,
+        ac_base,
+        ac_dex,
+        ac_max_dex_bonus,
+        stealth_dis,
+        str_min,
         speed,
         carrying_capacity,
         visible,
@@ -99,6 +114,12 @@ const createEquipmentTable = async () => {
       const damage = item.damage
         ? [item.damage.damage_type.name, item.damage.damage_dice]
         : null; // array
+      const two_handed_damage = item.two_handed_damage
+        ? [
+            item.two_handed_damage.damage_type.name,
+            item.two_handed_damage.damage_dice,
+          ]
+        : null; // array
       const range_type = item.weapon_range ? item.weapon_range : null; //string
       const range = item.range ? [item.range.normal, item.range.long] : null; // array
       const properties = [];
@@ -107,6 +128,22 @@ const createEquipmentTable = async () => {
             properties.push(property.name);
           })
         : null; // array
+
+      const armor_cat = item.armor_category ? item.armor_category : null; // string
+
+      const ac_base = item.armor_class ? item.armor_class.base : null; // number
+      const ac_dex = item.armor_class
+        ? item.armor_class.dex_bonus
+          ? true
+          : false
+        : false; // boolean
+      const ac_max_dex_bonus = ac_dex ? item.armor_class.max_bonus : null; // number
+
+      const stealth_dis = item.stealth_disadvantage
+        ? item.stealth_disadvantage
+        : false; // boolean
+
+      const str_min = item.str_minimum ? item.str_minimum : null;
 
       const speed = item.speed ? [item.speed.unit, item.speed.quantity] : null; // array
       const carrying_capacity = item.capacity ? item.capacity : null; // string
@@ -121,14 +158,23 @@ const createEquipmentTable = async () => {
         gear_cat,
         weapon_cat,
         damage,
+        two_handed_damage,
         range_type,
         range,
         properties,
+        armor_cat,
+        ac_base,
+        ac_dex,
+        ac_max_dex_bonus,
+        stealth_dis,
+        str_min,
         speed,
         carrying_capacity,
         true,
         notes
       );
+
+      // console.log(name, str_min);
     });
 
     await Promise.all(equipmentPromises);

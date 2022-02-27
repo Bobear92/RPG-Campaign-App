@@ -1,0 +1,28 @@
+.individual-item-border {
+  border: 1px solid black;
+}
+
+.individual-item-name-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
+.individual-item-name-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.individual-item-type {
+  margin-top: 0.1em;
+}
+
+.individual-item-type {
+  display: flex;
+  align-self: center;
+}
+
+.individual-item-cost {
+  display: flex;
+  align-self: center;
+}

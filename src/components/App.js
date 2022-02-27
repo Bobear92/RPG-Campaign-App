@@ -18,9 +18,17 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+
+// auth imports
 import { getToken, getUser } from "../auth";
+
+// api imports
 import { getUserByUsername } from "../api";
 import { getMySpells } from "../api/spells";
+import { getMyMonsters } from "../api/monsters";
+import { getMyEquipment } from "../api/equipment";
+
+// component imports
 import { Home, Header } from "./Main";
 import {
   CharacterSheet,
@@ -36,10 +44,8 @@ import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 import { APITest } from "./Admin";
-import { AllSpellsList, AllMonstersList } from "./GM";
-import { IndividualSpell, IndividualMonster } from "./Utility";
-
-import { getMyMonsters } from "../api/monsters";
+import { AllSpellsList, AllMonstersList, AllEquipmentList } from "./GM";
+import { IndividualSpell, IndividualMonster, IndividualItem } from "./Utility";
 
 const App = () => {
   // Log in stuff
@@ -91,17 +97,32 @@ const App = () => {
 
   const myMonsters = async () => {
     const monsters = await getMyMonsters();
-    // console.log(monsters);
     if (monsters) {
       setAllMyMonsters(monsters);
     }
   };
+
+  // end of monster stuff
+
+  //all the equipment from my database
+
+  const [allMyEquipment, setAllMyEquipment] = useState([]);
+
+  const myEquipment = async () => {
+    const equipment = await getMyEquipment();
+    if (equipment) {
+      setAllMyEquipment(equipment);
+    }
+  };
+
+  // end if equipment stuff
 
   useEffect(() => {
     isUserLoggedIn();
     handleUser();
     mySpells();
     myMonsters();
+    myEquipment();
   }, []);
 
   // test area
@@ -217,6 +238,9 @@ const App = () => {
           <Route path="/all-monsters-list">
             <AllMonstersList allMyMonsters={allMyMonsters} />
           </Route>
+          <Route path="/all-equipment-list">
+            <AllEquipmentList allMyEquipment={allMyEquipment} />
+          </Route>
           {/* // */}
           {/* Utility Routes */}
           {/* // */}
@@ -229,6 +253,9 @@ const App = () => {
               GM={GM}
               allMySpells={allMySpells}
             />
+          </Route>
+          <Route path="/individual-item/:id">
+            <IndividualItem allMyEquipment={allMyEquipment} GM={GM} />
           </Route>
         </Switch>
       </Router>

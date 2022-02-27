@@ -6,7 +6,7 @@ import { Login, Register } from ".";
 import { getUser } from "../../auth";
 import { getUserByUsername } from "../../api";
 
-const Header = ({ loggedIn, setLoggedIn }) => {
+const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
   const [logToggle, setLogToggle] = useState(false);
   const [registerToggle, setRegisterToggle] = useState(false);
   const [characterToggle, setCharacterToggle] = useState(false);
@@ -15,23 +15,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   const [worldInfoToggle, setWorldInfoToggle] = useState(false);
   const [mechanicsToggle, setMechanicsToggle] = useState(false);
 
-  const [admin, setAdmin] = useState(false);
-  const [GM, setGM] = useState(false);
   const user = getUser();
-
-  const handleUser = async () => {
-    const userName = await getUserByUsername(user);
-    // console.log(userName);
-
-    if (userName.admin) {
-      setAdmin(true);
-    } else if (userName.gm) {
-      setGM(true);
-    }
-  };
-  useEffect(() => {
-    handleUser();
-  }, []);
 
   return (
     <div className="header-main-container">
@@ -91,7 +75,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             </div>
           </div>
         </>
-      ) : loggedIn ? (
+      ) : loggedIn && admin === false && GM === false ? (
         <>
           <div className="header-top-container">
             <NavLink

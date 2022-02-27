@@ -130,7 +130,12 @@ const App = () => {
   return (
     <>
       <Router>
-        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Header
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          GM={GM}
+          admin={admin}
+        />
         <Switch>
           {/* Top Level Routes */}
 

@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { eachItem, allEquipment } from "../../api/equipment";
+import { eachClass, allClasses } from "../../api/classes";
 
 const APITest = () => {
-  // data to look at all the equipment on the api data
-  const [equipment, setEquipment] = useState([]);
-  const [everyItem, setEveryItem] = useState([]);
+  const [dndClasses, setDndClasses] = useState([]);
+  const [individualClass, setIndividualClass] = useState([]);
 
-  const equipmentData = async () => {
+  const classData = async () => {
     try {
-      const equipmentData = await allEquipment();
-      setEquipment(equipmentData);
+      const classData = await allClasses();
+      setDndClasses(classData);
     } catch (error) {
       throw error;
     }
   };
 
-  const details = equipment.map((item) => {
-    const itemUrl = item.url;
-    return itemUrl;
+  const details = dndClasses.map((dndClass) => {
+    const dndClassUrl = dndClass.url;
+    return dndClassUrl;
   });
 
-  const equipmentDescriptionsResponse = async () => {
-    const equipmentArray = await Promise.all(
-      details.map((itemUrl) => {
-        const item = eachItem(itemUrl);
-        return item;
+  const classDescriptionsResponse = async () => {
+    const classArray = await Promise.all(
+      details.map((classUrl) => {
+        const dndClass = eachClass(classUrl);
+        return dndClass;
       })
     );
-    setEveryItem(equipmentArray);
+    setIndividualClass(classArray);
   };
 
   useEffect(() => {
-    equipmentData();
-    equipmentDescriptionsResponse();
+    classData();
+    classDescriptionsResponse();
   }, []);
 
-  console.log(everyItem, "come on!");
+  console.log(individualClass, "Here we go");
 
   return (
     <div>
@@ -80,3 +79,42 @@ export default APITest;
 //  }, []);
 
 //  console.log(everyMonster);
+
+//
+//
+//
+
+// data to look at all the equipment on the api data
+//  const [equipment, setEquipment] = useState([]);
+//  const [everyItem, setEveryItem] = useState([]);
+
+//  const equipmentData = async () => {
+//    try {
+//      const equipmentData = await allEquipment();
+//      setEquipment(equipmentData);
+//    } catch (error) {
+//      throw error;
+//    }
+//  };
+
+//  const details = equipment.map((item) => {
+//    const itemUrl = item.url;
+//    return itemUrl;
+//  });
+
+//  const equipmentDescriptionsResponse = async () => {
+//    const equipmentArray = await Promise.all(
+//      details.map((itemUrl) => {
+//        const item = eachItem(itemUrl);
+//        return item;
+//      })
+//    );
+//    setEveryItem(equipmentArray);
+//  };
+
+//  useEffect(() => {
+//    equipmentData();
+//    equipmentDescriptionsResponse();
+//  }, []);
+
+//  console.log(everyItem, "come on!");

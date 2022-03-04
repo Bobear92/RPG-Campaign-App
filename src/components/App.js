@@ -38,14 +38,36 @@ import {
   SpellList,
   SubClass,
 } from "./CharacterSheet";
+
 import { Equipment, Inventory, SavedItems } from "./Items";
+
 import { Calendar } from "./Calendar";
+
 import { Classes, GameRules, HomeBrewRules, SavedMechanics } from "./Mechanics";
+
 import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
+
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
+
 import { APITest } from "./Admin";
+
 import { AllSpellsList, AllMonstersList, AllEquipmentList } from "./GM";
-import { IndividualSpell, IndividualMonster, IndividualItem } from "./Utility";
+
+import {
+  IndividualSpell,
+  IndividualMonster,
+  IndividualItem,
+  Dash,
+  Disengage,
+  Dodge,
+  Attack,
+  Cast_a_Spell,
+  Help,
+  Ready,
+  Hide,
+  Search,
+  Use_an_Object,
+} from "./Utility";
 
 const App = () => {
   // Log in stuff
@@ -261,6 +283,36 @@ const App = () => {
           </Route>
           <Route path="/individual-item/:id">
             <IndividualItem allMyEquipment={allMyEquipment} GM={GM} />
+          </Route>
+          <Route path="/mechanics-combat-actions-attack">
+            <Attack />
+          </Route>
+          <Route path="/mechanics-combat-actions-cast-a-spell">
+            <Cast_a_Spell />
+          </Route>
+          <Route path="/mechanics-combat-actions-dash">
+            <Dash />
+          </Route>
+          <Route path="/mechanics-combat-actions-disengage">
+            <Disengage />
+          </Route>
+          <Route path="/mechanics-combat-actions-dodge">
+            <Dodge />
+          </Route>
+          <Route path="/mechanics-combat-actions-help">
+            <Help />
+          </Route>
+          <Route path="/mechanics-combat-actions-hide">
+            <Hide />
+          </Route>
+          <Route path="/mechanics-combat-actions-ready">
+            <Ready />
+          </Route>
+          <Route path="/mechanics-combat-actions-search">
+            <Search />
+          </Route>
+          <Route path="/mechanics-combat-actions-use-an-object">
+            <Use_an_Object />
           </Route>
         </Switch>
       </Router>

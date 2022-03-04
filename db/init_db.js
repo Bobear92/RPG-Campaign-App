@@ -5,6 +5,7 @@ const {
 } = require("./index");
 
 const { createUser } = require("./users");
+const { createSpellInfo } = require("./classSpellInfo");
 
 async function buildTables() {
   try {
@@ -15,6 +16,7 @@ async function buildTables() {
       // drop all tables, in the correct order
       try {
         await client.query(`
+        DROP TABLE IF EXISTS class_spell_info;
         DROP TABLE IF EXISTS equipment;
         DROP TABLE IF EXISTS monsters;
         DROP TABLE IF EXISTS spells;
@@ -48,6 +50,8 @@ async function buildTables() {
     `);
 
         console.log("finished user table");
+
+        console.log("starting data tables");
 
         // spells table
         console.log("creating spells");
@@ -149,6 +153,42 @@ async function buildTables() {
 
         console.log("finished creating equipment table");
 
+        console.log("finished creating data tables");
+
+        console.log("starting to create class tables");
+
+        console.log("creating spell slot / spells known table");
+
+        await client.query(`
+              CREATE TABLE class_spell_info (
+                id SERIAL PRIMARY KEY,
+                name varchar(255) UNIQUE NOT NULL,
+                array_info TEXT,
+                first integer ARRAY,
+                second integer ARRAY,
+                third integer ARRAY,
+                fourth integer ARRAY,
+                fifth integer ARRAY,
+                sixth integer ARRAY,
+                seventh integer ARRAY,
+                eighth integer ARRAY,
+                ninth integer ARRAY,
+                tenth integer ARRAY,
+                eleventh integer ARRAY,
+                twelfth integer ARRAY,
+                thirteenth integer ARRAY,
+                fourteenth integer ARRAY,
+                fifteenth integer ARRAY,
+                sixteenth integer ARRAY,
+                seventeenth integer ARRAY,
+                eighteenth integer ARRAY,
+                nineteenth integer ARRAY,
+                twentieth integer ARRAY
+              )
+            `);
+
+        console.log("finished creating spell slot / spells know table");
+
         console.log("Finished building tables");
       } catch (error) {
         console.error("Error building tables");
@@ -199,7 +239,52 @@ async function populateInitialData() {
       }
     }
 
+    async function createInitialSpellSlotInfo() {
+      try {
+        const spellSlotData = [
+          {
+            name: "bard",
+            array_info:
+              "Index 0 - 9 are cantrip to lvl 9 spell slots. Index 10 is spells known 0 if class prepares spells a different way",
+            first: [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+            second: [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+            third: [2, 4, 2, 0, 0, 0, 0, 0, 0, 0, 6],
+            fourth: [3, 4, 3, 0, 0, 0, 0, 0, 0, 0, 7],
+            fifth: [3, 4, 3, 2, 0, 0, 0, 0, 0, 0, 8],
+            sixth: [3, 4, 3, 3, 0, 0, 0, 0, 0, 0, 9],
+            seventh: [3, 4, 3, 3, 1, 0, 0, 0, 0, 0, 10],
+            eighth: [3, 4, 3, 3, 2, 0, 0, 0, 0, 0, 11],
+            ninth: [3, 4, 3, 3, 3, 1, 0, 0, 0, 0, 12],
+            tenth: [4, 4, 3, 3, 3, 2, 0, 0, 0, 0, 14],
+            eleventh: [4, 4, 3, 3, 3, 2, 1, 0, 0, 0, 15],
+            twelfth: [4, 4, 3, 3, 3, 2, 1, 0, 0, 0, 15],
+            thirteenth: [4, 4, 3, 3, 3, 2, 1, 1, 0, 0, 16],
+            fourteenth: [4, 4, 3, 3, 3, 2, 1, 1, 0, 0, 18],
+            fifteenth: [4, 4, 3, 3, 3, 2, 1, 1, 1, 0, 19],
+            sixteenth: [4, 4, 3, 3, 3, 2, 1, 1, 1, 0, 19],
+            seventeenth: [4, 4, 3, 3, 3, 2, 1, 1, 1, 1, 20],
+            eighteenth: [4, 4, 3, 3, 3, 3, 1, 1, 1, 1, 22],
+            nineteenth: [4, 4, 3, 3, 3, 3, 2, 1, 1, 1, 22],
+            nineteenth: [4, 4, 3, 3, 3, 3, 2, 1, 1, 1, 22],
+            twentieth: [4, 4, 3, 3, 3, 3, 2, 2, 1, 1, 22],
+          },
+        ];
+
+        const spell_slot_info = await Promise.all(
+          spellSlotData.map(createSpellInfo)
+        );
+
+        console.log("Spell slot info created created:");
+        console.log(spell_slot_info, "spell slot info");
+        console.log("Finished creating spell slot info!");
+      } catch (error) {
+        console.error("Error creating spell slot info!");
+        throw error;
+      }
+    }
+
     await createInitialUsers();
+    await createInitialSpellSlotInfo();
   } catch (error) {
     throw error;
   }

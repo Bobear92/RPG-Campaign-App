@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { eachClass, allClasses } from "../../api/classes";
+import { eachFeature, allFeatures } from "../../api/features";
 
 const APITest = () => {
-  const [dndClasses, setDndClasses] = useState([]);
-  const [individualClass, setIndividualClass] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [everyFeature, setEachFeature] = useState([]);
 
-  const classData = async () => {
+  const featureData = async () => {
     try {
-      const classData = await allClasses();
-      setDndClasses(classData);
+      const featureData = await allFeatures();
+      setFeatures(featureData);
     } catch (error) {
       throw error;
     }
   };
 
-  const details = dndClasses.map((dndClass) => {
-    const dndClassUrl = dndClass.url;
-    return dndClassUrl;
+  const details = features.map((feature) => {
+    const featureUrl = feature.url;
+    return featureUrl;
   });
 
-  const classDescriptionsResponse = async () => {
-    const classArray = await Promise.all(
-      details.map((classUrl) => {
-        const dndClass = eachClass(classUrl);
-        return dndClass;
+  const featuresDescriptionsResponse = async () => {
+    const featureArray = await Promise.all(
+      details.map((featureUrl) => {
+        const feature = eachFeature(featureUrl);
+        return feature;
       })
     );
-    setIndividualClass(classArray);
+    setEachFeature(featureArray);
   };
 
   useEffect(() => {
-    classData();
-    classDescriptionsResponse();
+    featureData();
+    featuresDescriptionsResponse();
   }, []);
 
-  console.log(individualClass, "Here we go");
+  console.log(everyFeature, "lets see it");
 
   return (
     <div>

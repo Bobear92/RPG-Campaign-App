@@ -27,6 +27,7 @@ import { getUserByUsername } from "../api";
 import { getMySpells } from "../api/spells";
 import { getMyMonsters } from "../api/monsters";
 import { getMyEquipment } from "../api/equipment";
+import { getMyRules } from "../api/home_brew_rules";
 
 // component imports
 import { Home, Header } from "./Main";
@@ -51,7 +52,12 @@ import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 
 import { APITest } from "./Admin";
 
-import { AllSpellsList, AllMonstersList, AllEquipmentList } from "./GM";
+import {
+  AddHomeRule,
+  AllSpellsList,
+  AllMonstersList,
+  AllEquipmentList,
+} from "./GM";
 
 import {
   IndividualSpell,
@@ -87,6 +93,7 @@ const App = () => {
 
   const [admin, setAdmin] = useState(false);
   const [GM, setGM] = useState(false);
+  const [gmName, setGmName] = useState("");
   const user = getUser();
 
   const handleUser = async () => {
@@ -96,6 +103,7 @@ const App = () => {
       setAdmin(true);
     } else if (userName.gm) {
       setGM(true);
+      setGmName(userName.username);
     }
   };
 
@@ -139,12 +147,26 @@ const App = () => {
 
   // end if equipment stuff
 
+  // all the rules from my database
+
+  const [allMyRules, setAllMyRules] = useState([]);
+
+  const myRules = async () => {
+    const rules = await getMyRules();
+    if (rules) {
+      setAllMyRules(rules);
+    }
+  };
+
+  // end of rule stuff
+
   useEffect(() => {
     isUserLoggedIn();
     handleUser();
     mySpells();
     myMonsters();
     myEquipment();
+    myRules();
   }, []);
 
   // test area
@@ -213,7 +235,7 @@ const App = () => {
             <GameRules />
           </Route>
           <Route path="/home-brew-rules">
-            <HomeBrewRules />
+            <HomeBrewRules allMyRules={allMyRules} />
           </Route>
           <Route path="/saved-mechanics">
             <SavedMechanics />
@@ -259,6 +281,9 @@ const App = () => {
           </Route>
           {/* // */}
           {/* GM Routes */}
+          <Route path="/add-home-brew-rule">
+            <AddHomeRule gmName={gmName} />
+          </Route>
           <Route path="/all-spells-list">
             <AllSpellsList allMySpells={allMySpells} />
           </Route>

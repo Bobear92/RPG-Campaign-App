@@ -59,4 +59,7 @@ apiRouter.use("/monsters", monstersRouter);
 const equipmentRouter = require("./equipment");
 apiRouter.use("/equipment", equipmentRouter);
 
+const homeRuleRouter = require("./home_brew_rules");
+apiRouter.use("/home_brew_rules", homeRuleRouter);
+
 module.exports = apiRouter;

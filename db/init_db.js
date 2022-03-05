@@ -16,6 +16,7 @@ async function buildTables() {
       // drop all tables, in the correct order
       try {
         await client.query(`
+        DROP TABLE IF EXISTS home_brew_rules;
         DROP TABLE IF EXISTS class_spell_info;
         DROP TABLE IF EXISTS equipment;
         DROP TABLE IF EXISTS monsters;
@@ -148,7 +149,7 @@ async function buildTables() {
             carrying_capacity TEXT,
             visible BOOLEAN DEFAULT 'false', 
             gm_notes TEXT NOT NULL
-          )
+          );
         `);
 
         console.log("finished creating equipment table");
@@ -184,13 +185,33 @@ async function buildTables() {
                 eighteenth integer ARRAY,
                 nineteenth integer ARRAY,
                 twentieth integer ARRAY
-              )
+              );
             `);
 
         console.log("finished creating spell slot / spells know table");
 
+        console.log("Finished creating class tables");
+
+        console.log("starting to create mechanics tables");
+
+        console.log("starting to create home brew rules table");
+
+        await client.query(`
+              CREATE TABLE home_brew_rules (
+                id SERIAL PRIMARY KEY,
+                name varchar(255) UNIQUE NOT NULL,
+                description TEXT, 
+                gm TEXT
+              );
+        `);
+
+        console.log("Finished creating home brew rules table");
+
+        console.log("Finished creating mechanics tables");
+
         console.log("Finished building tables");
       } catch (error) {
+        console.log(error);
         console.error("Error building tables");
       }
     }
@@ -198,6 +219,7 @@ async function buildTables() {
     await dropTables();
     await createTables();
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
@@ -284,7 +306,7 @@ async function populateInitialData() {
     }
 
     await createInitialUsers();
-    await createInitialSpellSlotInfo();
+    // await createInitialSpellSlotInfo();
   } catch (error) {
     throw error;
   }

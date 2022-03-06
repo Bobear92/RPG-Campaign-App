@@ -8,8 +8,6 @@ const IndividualMonster = ({ allMyMonsters, GM, allMySpells }) => {
   const { id } = useParams();
   const monster = allMyMonsters.find((element) => element.id == id);
 
-  console.log(monster);
-
   const name = monster.name;
   const size = monster.size;
   const type = monster.type;

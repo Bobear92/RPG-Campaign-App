@@ -14,6 +14,8 @@ const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
   const [narrativeToggle, setNarrativeToggle] = useState(false);
   const [worldInfoToggle, setWorldInfoToggle] = useState(false);
   const [mechanicsToggle, setMechanicsToggle] = useState(false);
+  const [gmListToggle, setGmListToggle] = useState(false);
+  const [contentToggle, setContentToggle] = useState(false);
 
   const user = getUser();
 
@@ -61,21 +63,54 @@ const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
             </NavLink>
           </div>
           <div className="border"></div>
-          <div className="header-sub-buttons">
-            <div className="header-sub-button-links">
-              <NavLink className="nav-button" to="/all-spells-list">
-                All Spells
-              </NavLink>
-              <NavLink className="nav-button" to="/all-monsters-list">
-                All Monsters
-              </NavLink>
-              <NavLink className="nav-button" to="/all-equipment-list">
-                All Equipment
-              </NavLink>
-            </div>
+          <div className="header-main-buttons">
+            <button
+              className="nav-main-button"
+              onClick={() => {
+                setContentToggle(false);
+                setGmListToggle(true);
+              }}
+            >
+              Database
+            </button>
+            <button
+              className="nav-main-button"
+              onClick={() => {
+                setGmListToggle(false);
+                setContentToggle(true);
+              }}
+            >
+              Create/Edit Content
+            </button>
           </div>
+          <div className="border"></div>
+          <div className="header-sub-buttons">
+            {gmListToggle ? (
+              <div className="header-sub-button-links">
+                <NavLink className="nav-button" to="/all-spells-list">
+                  All Spells
+                </NavLink>
+                <NavLink className="nav-button" to="/all-monsters-list">
+                  All Monsters
+                </NavLink>
+                <NavLink className="nav-button" to="/all-equipment-list">
+                  All Equipment
+                </NavLink>
+              </div>
+            ) : contentToggle ? (
+              <div className="header-sub-button-links">
+                <NavLink
+                  className="nav-button"
+                  to="/home-brew-rules-control-center"
+                >
+                  Home Brew Rules
+                </NavLink>
+              </div>
+            ) : null}
+          </div>
+          <div className="border"></div>
         </>
-      ) : loggedIn && admin === false && GM === false ? (
+      ) : loggedIn === true && admin === false && GM === false ? (
         <>
           <div className="header-top-container">
             <NavLink

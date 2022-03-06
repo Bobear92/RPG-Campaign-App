@@ -6,7 +6,6 @@ import "./IndividualItem.css";
 const IndividualItem = ({ allMyEquipment, GM }) => {
   const { id } = useParams();
   const item = allMyEquipment.find((element) => element.id == id);
-  console.log(item);
 
   const type = item.item_type;
   const name = item.name;

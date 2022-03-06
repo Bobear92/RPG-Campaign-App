@@ -23,3 +23,5 @@ const HomeBrewRules = ({ allMyRules }) => {
   );
 };
 export default HomeBrewRules;
+
+// need to be able to only see the rules for the campaign they are in once campaign selection is figured out.

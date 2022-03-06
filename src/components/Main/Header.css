@@ -26,8 +26,8 @@
   background-color: rgb(55, 39, 73);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   margin: 3px;
-  height: 30px;
-  width: 60px;
+  height: max-content;
+  width: max-content;
 }
 .nav-button:hover {
   background-color: rgb(175, 152, 20);
@@ -45,5 +45,5 @@
 }
 
 .border {
-  border: 5px solid black;
+  border: 2px solid black;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { loginUser } from "../../api";
 import { storeToken, storeUser } from "../../auth";
 
@@ -6,6 +7,12 @@ const Login = ({ setLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  let history = useHistory();
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <div className="login-interface-main">
       <form
@@ -22,9 +29,12 @@ const Login = ({ setLoggedIn }) => {
             setUsername("");
             setPassword("");
             setError("");
+            history.push("/");
           } catch (error) {
             console.log(error.response);
             setError(error);
+          } finally {
+            refreshPage();
           }
         }}
       >

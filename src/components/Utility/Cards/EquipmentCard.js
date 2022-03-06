@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./EquipmentCard.css";
 
 const EquipmentCard = ({ item }) => {
-  console.log(item);
   const name = item.name;
   const type = item.item_type;
   const cost = item.cost[0];

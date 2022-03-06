@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { registerUser } from "../../api";
 import { storeToken, storeUser } from "../../auth";
 
@@ -8,6 +9,11 @@ const Register = ({ setLoggedIn }) => {
   const [error, setError] = useState("");
   const admin = false;
   const gm = false;
+  let history = useHistory();
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <div className="register-interface-main">
@@ -30,9 +36,12 @@ const Register = ({ setLoggedIn }) => {
             setUsername("");
             setPassword("");
             setError("");
+            history.push("/");
           } catch (error) {
             console.log(error);
             setError(error);
+          } finally {
+            refreshPage();
           }
         }}
       >

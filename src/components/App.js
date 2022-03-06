@@ -53,7 +53,7 @@ import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 import { APITest } from "./Admin";
 
 import {
-  AddHomeRule,
+  HomeBrewRulesManipulation,
   AllSpellsList,
   AllMonstersList,
   AllEquipmentList,
@@ -281,8 +281,11 @@ const App = () => {
           </Route>
           {/* // */}
           {/* GM Routes */}
-          <Route path="/add-home-brew-rule">
-            <AddHomeRule gmName={gmName} />
+          <Route path="/home-brew-rules-control-center">
+            <HomeBrewRulesManipulation
+              gmName={gmName}
+              allMyRules={allMyRules}
+            />
           </Route>
           <Route path="/all-spells-list">
             <AllSpellsList allMySpells={allMySpells} />

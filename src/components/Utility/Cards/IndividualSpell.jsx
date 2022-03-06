@@ -6,7 +6,6 @@ import "./IndividualSpell.css";
 const IndividualSpell = ({ allMySpells, GM }) => {
   const { id } = useParams();
   const spell = allMySpells.find((element) => element.id == id);
-  console.log(spell);
 
   const name = spell.name;
   const level = spell.level === 0 ? "Cantrip" : spell.level;

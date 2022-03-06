@@ -1,0 +1,50 @@
+.home-rule-manipulation-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid black;
+  margin: 1rem;
+}
+
+.home-rule-manipulation-content-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-brew-rules-manipulation-border {
+  border: 3px solid black;
+  margin: 1rem;
+}
+
+.home-brew-rules-rule-map-main-component {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-brew-rules-rule-map-component {
+  border: 1px solid black;
+  width: max-content;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.home-brew-rules-manipulation-add-form {
+  display: flex;
+  justify-content: center;
+}
+
+.add-rule-visible-input {
+  display: flex;
+  justify-content: center;
+}
+
+.button-outer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-rule-interface-button:hover {
+  background-color: rgb(175, 152, 20);
+}

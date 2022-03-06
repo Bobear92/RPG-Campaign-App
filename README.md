@@ -91,13 +91,13 @@ It will also create a postgres database for you, on the free tier.
 
 1: Switch over all urls in src/api or nothing will work! Then push to git hub
 
-2: Deploy all in wsl terminal
+2: Open wsl terminal
 
 3: Log into heroku first with `heroku login`
 
 4: Once you've built the front-end you're ready to deploy, simply run `git push heroku main`. Note, your git has to be clean for this to work (which is why our two git commands live as part of getting ready to deploy, above).
 
-This will send off the new code to heroku, will install the node modules on their server, and will run `npm start`, starting up your express server.
+This will send off the new code to heroku, will install the node modules on their server, and will run npm start, starting up your express server.
 
 If you need to rebuild your database on heroku, you can do so right now with this command:
 
@@ -137,6 +137,6 @@ These ones for re-deploying with data pulled down from current site
 
 stuff
 
-8: Once that command runs, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
+8: To open and check everything is okay, you can type `heroku open` to get a browser to open up locally with your full-stack application running remotely.
 
 9: Switch the url's back to development in src/api then push back to git hub

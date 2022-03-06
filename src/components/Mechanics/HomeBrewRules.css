@@ -1,0 +1,15 @@
+.home-brew-rules-main-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-brew-rules-rule-map-main-component {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home-brew-rules-rule-map-component {
+  margin: 1rem;
+  padding: 0.5rem;
+}

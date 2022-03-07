@@ -39,3 +39,30 @@ export async function getUserByUsername(username) {
     throw error;
   }
 }
+
+export async function getAllUsers() {
+  try {
+    const { data } = await axios.get(`${BASE}users/all`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function makeGM(id) {
+  try {
+    const { data } = await axios.patch(`${BASE}users/${id}`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteUser(id) {
+  try {
+    const { data } = await axios.delete(`${BASE}users/${id}`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

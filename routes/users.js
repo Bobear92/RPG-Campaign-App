@@ -1,8 +1,17 @@
 const express = require("express");
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { getUser, getUserByUsername, createUser } = require("../db/users");
+const {
+  getUser,
+  getUserByUsername,
+  createUser,
+  getAllUsers,
+  makeGM,
+  deleteUser,
+} = require("../db/users");
 const { JWT_SECRET = "innerEarCanal" } = process.env;
+
+// get
 
 usersRouter.get("/", async (req, res, next) => {
   const { username } = req.body;
@@ -28,6 +37,23 @@ usersRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+usersRouter.get("/all", async (req, res, next) => {
+  try {
+    const users = await getAllUsers();
+    if (users) {
+      res.send(users);
+    } else {
+      res.send({
+        message: "No users found, check server",
+      });
+    }
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+// post
 
 usersRouter.post("/", async (req, res, next) => {
   const { username } = req.body;
@@ -135,6 +161,31 @@ usersRouter.post("/register", async (req, res, next) => {
         });
       }
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+//patch
+
+usersRouter.patch("/:userId", async (req, res, next) => {
+  const id = req.params.userId;
+  try {
+    const king = await makeGM(id);
+
+    res.send(king);
+  } catch (error) {
+    next({ name: "Status", message: "Already GM" });
+  }
+});
+
+// delete
+
+usersRouter.delete("/:userId", async (req, res, next) => {
+  const id = req.params.userId;
+  try {
+    const destroyed = await deleteUser(id);
+    res.send(destroyed);
   } catch (error) {
     next(error);
   }

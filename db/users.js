@@ -87,9 +87,63 @@ async function getUserByUsername(username) {
   }
 }
 
+async function getAllUsers() {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT * from users 
+      `
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function makeGM(id) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+        UPDATE users
+        SET gm='true'
+        WHERE id=$1
+        RETURNING *;
+      
+      `,
+      [id]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteUser(id) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    DELETE FROM users
+    where id = $1
+    RETURNING *;
+    `,
+      [id]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createUser,
   getUser,
   getUserById,
   getUserByUsername,
+  getAllUsers,
+  makeGM,
+  deleteUser,
 };

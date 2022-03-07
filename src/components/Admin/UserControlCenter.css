@@ -1,0 +1,50 @@
+.user-control-center-main-component {
+  background-image: url("https://img.wallpapersafari.com/desktop/800/450/30/59/Bo4pPW.jpg");
+  margin: 1rem;
+  background-size: cover;
+}
+
+.user-control-center-title {
+  text-decoration: underline;
+  background-color: rgb(48, 48, 131);
+  padding: 0.5rem;
+  width: max-content;
+  border: 1px solid black;
+}
+
+.user-control-center-users-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-control-center-users-inner-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-control-center-individual-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  margin: 1rem;
+  background-color: rgb(48, 48, 131);
+}
+
+.user-control-center-buttons {
+  display: flex;
+  width: max-content;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.user-control-center-button {
+  margin: 1rem;
+}
+
+.user-control-center-border {
+  border: 2px solid black;
+  margin: 0.5rem;
+}

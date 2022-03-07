@@ -16,6 +16,8 @@ const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
   const [mechanicsToggle, setMechanicsToggle] = useState(false);
   const [gmListToggle, setGmListToggle] = useState(false);
   const [contentToggle, setContentToggle] = useState(false);
+  const [testingToggle, setTestingToggle] = useState(false);
+  const [controlToggle, setControlToggle] = useState(false);
 
   const user = getUser();
 
@@ -39,10 +41,41 @@ const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
             </NavLink>
           </div>
           <div className="border"></div>
+          <div className="header-main-buttons">
+            <button
+              className="nav-main-button"
+              onClick={() => {
+                setControlToggle(false);
+                setTestingToggle(true);
+              }}
+            >
+              Testing
+            </button>
+            <button
+              className="nav-main-button"
+              onClick={() => {
+                setTestingToggle(false);
+                setControlToggle(true);
+              }}
+            >
+              Control Center
+            </button>
+          </div>
+          <div className="border"></div>
           <div className="header-sub-buttons">
-            <NavLink className="nav-button" to="/api-test">
-              Api Testing
-            </NavLink>
+            {testingToggle ? (
+              <div className="header-sub-button-links">
+                <NavLink className="nav-button" to="/api-test">
+                  Api Testing
+                </NavLink>
+              </div>
+            ) : controlToggle ? (
+              <div className="header-sub-button-links">
+                <NavLink className="nav-button" to="/user-control-center">
+                  Users Control Center
+                </NavLink>
+              </div>
+            ) : null}
           </div>
         </>
       ) : GM && loggedIn ? (

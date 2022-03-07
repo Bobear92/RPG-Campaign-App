@@ -116,7 +116,6 @@ const HomeBrewRulesManipulation = ({ gmName, allMyRules }) => {
                           className="visible-status-rule-button"
                           onClick={async (event) => {
                             event.preventDefault();
-                            () => window.location.reload(false);
                             try {
                               await updateRuleVisibleStatus(rule.id, false);
                             } catch (error) {

@@ -23,7 +23,7 @@ import {
 import { getToken, getUser } from "../auth";
 
 // api imports
-import { getUserByUsername } from "../api";
+import { getUserByUsername, getAllUsers } from "../api";
 import { getMySpells } from "../api/spells";
 import { getMyMonsters } from "../api/monsters";
 import { getMyEquipment } from "../api/equipment";
@@ -50,7 +50,7 @@ import { Backstory, CharacterInfo, Notes, SavedInfo } from "./Narrative";
 
 import { Adventures, Map, NPCs, SavedPlotInfo, Settings } from "./WorldInfo";
 
-import { APITest } from "./Admin";
+import { APITest, UserControlCenter, DeleteUser } from "./Admin";
 
 import {
   HomeBrewRulesManipulation,
@@ -104,6 +104,14 @@ const App = () => {
     } else if (userName.gm) {
       setGM(true);
       setGmName(userName.username);
+    }
+  };
+
+  const [allUsers, setAllUsers] = useState([]);
+  const usersData = async () => {
+    const data = await getAllUsers();
+    if (data) {
+      setAllUsers(data);
     }
   };
 
@@ -163,13 +171,12 @@ const App = () => {
   useEffect(() => {
     isUserLoggedIn();
     handleUser();
+    usersData();
     mySpells();
     myMonsters();
     myEquipment();
     myRules();
   }, []);
-
-  // test area
 
   return (
     <>
@@ -278,6 +285,12 @@ const App = () => {
           {/* // */}
           <Route path="/api-test">
             <APITest />
+          </Route>
+          <Route path="/user-control-center">
+            <UserControlCenter allUsers={allUsers} />
+          </Route>
+          <Route path="/delete-user/:name/:id">
+            <DeleteUser />
           </Route>
           {/* // */}
           {/* GM Routes */}

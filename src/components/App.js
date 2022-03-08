@@ -31,7 +31,7 @@ import { getMyRules } from "../api/home_brew_rules";
 import { getOfficialRules } from "../api/official_rules";
 
 // component imports
-import { Home, Header } from "./Main";
+import { Home, Header, Footer } from "./Main";
 import {
   CharacterSheet,
   ClassInfo,
@@ -66,16 +66,6 @@ import {
   IndividualMonster,
   IndividualItem,
   IndividualOfficialRule,
-  Dash,
-  Disengage,
-  Dodge,
-  Attack,
-  Cast_a_Spell,
-  Help,
-  Ready,
-  Hide,
-  Search,
-  Use_an_Object,
 } from "./Utility";
 
 const App = () => {
@@ -254,7 +244,7 @@ const App = () => {
             <Classes />
           </Route>
           <Route path="/game-rules">
-            <GameRules />
+            <GameRules allOfficialRules={allOfficialRules} />
           </Route>
           <Route path="/home-brew-rules">
             <HomeBrewRules allMyRules={allMyRules} />
@@ -346,37 +336,8 @@ const App = () => {
           <Route path="/individual-official-rule/:id">
             <IndividualOfficialRule allOfficialRules={allOfficialRules} />
           </Route>
-          <Route path="/mechanics-combat-actions-attack">
-            <Attack />
-          </Route>
-          <Route path="/mechanics-combat-actions-cast-a-spell">
-            <Cast_a_Spell />
-          </Route>
-          <Route path="/mechanics-combat-actions-dash">
-            <Dash />
-          </Route>
-          <Route path="/mechanics-combat-actions-disengage">
-            <Disengage />
-          </Route>
-          <Route path="/mechanics-combat-actions-dodge">
-            <Dodge />
-          </Route>
-          <Route path="/mechanics-combat-actions-help">
-            <Help />
-          </Route>
-          <Route path="/mechanics-combat-actions-hide">
-            <Hide />
-          </Route>
-          <Route path="/mechanics-combat-actions-ready">
-            <Ready />
-          </Route>
-          <Route path="/mechanics-combat-actions-search">
-            <Search />
-          </Route>
-          <Route path="/mechanics-combat-actions-use-an-object">
-            <Use_an_Object />
-          </Route>
         </Switch>
+        <Footer />
       </Router>
     </>
   );

@@ -6,19 +6,23 @@ const HomeBrewRules = ({ allMyRules }) => {
     <div className="home-brew-rules-main-component">
       <h1>Home Brew Rules</h1>
       <div className="home-brew-rules-rule-map-main-component">
-        {allMyRules && allMyRules.length
-          ? allMyRules.map((rule, idx) => {
-              return rule.visible ? (
-                <div
-                  className="home-brew-rules-rule-map-component"
-                  key={`rule inside of rules map in home brew rules ${rule.name} ${idx}`}
-                >
-                  <h3>{rule.name}</h3>
-                  <p>{rule.description}</p>
-                </div>
-              ) : null;
-            })
-          : null}
+        {allMyRules && allMyRules.length ? (
+          allMyRules.map((rule, idx) => {
+            return rule.visible ? (
+              <div
+                className="home-brew-rules-rule-map-component"
+                key={`rule inside of rules map in home brew rules ${rule.name} ${idx}`}
+              >
+                <h3>{rule.name}</h3>
+                <p>{rule.description}</p>
+              </div>
+            ) : null;
+          })
+        ) : (
+          <div>
+            <p>No Home brew rules made</p>
+          </div>
+        )}
       </div>
     </div>
   );

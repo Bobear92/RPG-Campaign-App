@@ -1,0 +1,19 @@
+.footer-main-container {
+  display: flex;
+  justify-content: center;
+  background-image: url("https://www.10wallpaper.com/wallpaper/1920x1440/1809/Amazing_Red_Nebula_Galaxy_Stars_HD_1920x1440.jpg");
+  background-position: center;
+  background-size: 100%, 20%;
+  background-repeat: no-repeat, repeat;
+}
+
+.footer-campaign-chooser-container {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  background-image: url("https://s325.podbean.com/pb/5fef3fffd773967ffd80f2316fbe61f2/62279adf/data1/fs156/9413453/uploads/lazy_dm_workbook_banner.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+  padding: 0.5rem;
+}

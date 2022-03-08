@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import "./NPCs.css";
 
 const NPCs = () => {
-  return <p>This is the NPCs page.</p>;
+  return (
+    <div className="npcs-main-container">
+      <p>NPC lists</p>
+    </div>
+  );
 };
 
 export default NPCs;

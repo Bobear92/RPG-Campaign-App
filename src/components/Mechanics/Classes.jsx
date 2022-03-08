@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import "./Classes.css";
 
 const Classes = () => {
-  return <p>This is the Classes page.</p>;
+  return (
+    <div className="classes-main-container">
+      <p>Class info</p>
+    </div>
+  );
 };
 
 export default Classes;

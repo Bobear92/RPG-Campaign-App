@@ -1,0 +1,33 @@
+.game-rules-main-container {
+  border: 1.5px solid black;
+  height: 80vh;
+  padding: 0.5rem;
+  background-image: url("https://i.pinimg.com/736x/af/f0/0c/aff00c7e284cc05403c755570240b51a.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+}
+
+.game-rules-title {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+.game-rules-rules-map-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  height: 75vh;
+  justify-content: space-evenly;
+  align-content: space-around;
+}
+
+.game-rules-each-rule-container {
+  border: 1px solid black;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: max-content;
+  background-color: rgb(133, 111, 84);
+}

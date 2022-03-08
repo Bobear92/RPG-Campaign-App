@@ -11,7 +11,7 @@ const IndividualOfficialRule = ({ allOfficialRules }) => {
   const description = rule.description;
 
   return (
-    <div>
+    <div className="individual-official-rule-main-container">
       <p>{name}</p>
       <p>{description}</p>
     </div>

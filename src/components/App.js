@@ -28,6 +28,7 @@ import { getMySpells } from "../api/spells";
 import { getMyMonsters } from "../api/monsters";
 import { getMyEquipment } from "../api/equipment";
 import { getMyRules } from "../api/home_brew_rules";
+import { getOfficialRules } from "../api/official_rules";
 
 // component imports
 import { Home, Header } from "./Main";
@@ -57,12 +58,14 @@ import {
   AllSpellsList,
   AllMonstersList,
   AllEquipmentList,
+  AllOfficialRules,
 } from "./GM";
 
 import {
   IndividualSpell,
   IndividualMonster,
   IndividualItem,
+  IndividualOfficialRule,
   Dash,
   Disengage,
   Dodge,
@@ -155,7 +158,18 @@ const App = () => {
 
   // end if equipment stuff
 
-  // all the rules from my database
+  // all the official rules
+
+  const [allOfficialRules, setAllOfficialRules] = useState([]);
+
+  const officialRules = async () => {
+    const rules = await getOfficialRules();
+    if (rules) {
+      setAllOfficialRules(rules);
+    }
+  };
+
+  // all the home brew rules rules from my database
 
   const [allMyRules, setAllMyRules] = useState([]);
 
@@ -175,6 +189,7 @@ const App = () => {
     mySpells();
     myMonsters();
     myEquipment();
+    officialRules();
     myRules();
   }, []);
 
@@ -309,6 +324,9 @@ const App = () => {
           <Route path="/all-equipment-list">
             <AllEquipmentList allMyEquipment={allMyEquipment} />
           </Route>
+          <Route path="/all-official-rules">
+            <AllOfficialRules allOfficialRules={allOfficialRules} />
+          </Route>
           {/* // */}
           {/* Utility Routes */}
           {/* // */}
@@ -324,6 +342,9 @@ const App = () => {
           </Route>
           <Route path="/individual-item/:id">
             <IndividualItem allMyEquipment={allMyEquipment} GM={GM} />
+          </Route>
+          <Route path="/individual-official-rule/:id">
+            <IndividualOfficialRule allOfficialRules={allOfficialRules} />
           </Route>
           <Route path="/mechanics-combat-actions-attack">
             <Attack />

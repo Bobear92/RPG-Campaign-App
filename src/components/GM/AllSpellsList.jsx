@@ -2,8 +2,6 @@ import React, { useState, Fragment } from "react";
 import { SpellCard } from "../Utility";
 
 const AllSpellsList = ({ allMySpells }) => {
-  // console.log(allMySpells);
-
   return (
     <div>
       {allMySpells && allMySpells.length ? (

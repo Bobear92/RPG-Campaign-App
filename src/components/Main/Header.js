@@ -129,6 +129,9 @@ const Header = ({ loggedIn, setLoggedIn, GM, admin }) => {
                 <NavLink className="nav-button" to="/all-equipment-list">
                   All Equipment
                 </NavLink>
+                <NavLink className="nav-button" to="/all-official-rules">
+                  All Official Rules
+                </NavLink>
               </div>
             ) : contentToggle ? (
               <div className="header-sub-button-links">

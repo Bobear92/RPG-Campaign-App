@@ -11,6 +11,7 @@
     "seed-monsters": "node script/fetchMonstersFromAPI.js",
     "seed-equipment": "node script/fetchEquipmentFromAPI.js",
     "seed-features": "node script/fetchFeaturesFromAPI.js",
+    "seed-rules": "node script/fetchRulesFromAPI.js",
     "server:dev": "nodemon index.js",
     "db:build": "node ./db/init_db",
     "start": "node index.js"

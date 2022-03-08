@@ -4,6 +4,8 @@ export { default as MonsterCard } from "./Cards/MonsterCard";
 export { default as IndividualMonster } from "./Cards/IndividualMonster";
 export { default as EquipmentCard } from "./Cards/EquipmentCard";
 export { default as IndividualItem } from "./Cards/IndividualItem";
+export { default as OfficialRuleCard } from "./Cards/OfficialRuleCard";
+export { default as IndividualOfficialRule } from "./Cards/IndividualOfficialRule";
 export { default as Attack } from "./Static_Rules/Combat/Actions/Attack";
 export { default as Cast_a_Spell } from "./Static_Rules/Combat/Actions/Cast_a_Spell";
 export { default as Dash } from "./Static_Rules/Combat/Actions/Dash";

@@ -1,40 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { eachFeature, allFeatures } from "../../api/features";
+import {
+  allRuleCategories,
+  eachRuleCategory,
+  eachRule,
+} from "../../api/official_rules";
 
 const APITest = () => {
-  const [features, setFeatures] = useState([]);
-  const [everyFeature, setEachFeature] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [ruleCat, setRuleCat] = useState([]);
+  const [rule, setRule] = useState([]);
 
-  const featureData = async () => {
+  const categoriesData = async () => {
     try {
-      const featureData = await allFeatures();
-      setFeatures(featureData);
+      const data = await allRuleCategories();
+      setCategories(data);
     } catch (error) {
       throw error;
     }
   };
 
-  const details = features.map((feature) => {
-    const featureUrl = feature.url;
-    return featureUrl;
+  const firstUrl = categories.map((data) => {
+    const firstUrl = data.url;
+    return firstUrl;
   });
 
-  const featuresDescriptionsResponse = async () => {
-    const featureArray = await Promise.all(
-      details.map((featureUrl) => {
-        const feature = eachFeature(featureUrl);
-        return feature;
+  const categoryDescriptionResponse = async () => {
+    const data = await Promise.all(
+      firstUrl.map((secondUrl) => {
+        const innerData = eachRuleCategory(secondUrl);
+        return innerData;
       })
     );
-    setEachFeature(featureArray);
+    setRuleCat(data);
+  };
+
+  const masterArray = [];
+  const finalUrl = ruleCat.map((data) => {
+    return data.map((innerData) => {
+      const finalUrl = innerData.url;
+      masterArray.push(finalUrl);
+    });
+  });
+
+  const finalDescriptionResponse = async () => {
+    const finalData = await Promise.all(
+      masterArray.map((data) => {
+        const lastData = eachRule(data);
+        return lastData;
+      })
+    );
+    setRule(finalData);
   };
 
   useEffect(() => {
-    featureData();
-    featuresDescriptionsResponse();
+    categoriesData();
+    categoryDescriptionResponse();
+    finalDescriptionResponse();
   }, []);
 
-  console.log(everyFeature, "lets see it");
+  console.log(rule, "come on");
 
   return (
     <div>
@@ -118,3 +142,42 @@ export default APITest;
 //  }, []);
 
 //  console.log(everyItem, "come on!");
+
+//
+//
+//
+
+// This data to look at all the features
+// const [features, setFeatures] = useState([]);
+//   const [everyFeature, setEachFeature] = useState([]);
+
+//   const featureData = async () => {
+//     try {
+//       const featureData = await allFeatures();
+//       setFeatures(featureData);
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
+
+//   const details = features.map((feature) => {
+//     const featureUrl = feature.url;
+//     return featureUrl;
+//   });
+
+//   const featuresDescriptionsResponse = async () => {
+//     const featureArray = await Promise.all(
+//       details.map((featureUrl) => {
+//         const feature = eachFeature(featureUrl);
+//         return feature;
+//       })
+//     );
+//     setEachFeature(featureArray);
+//   };
+
+//   useEffect(() => {
+//     featureData();
+//     featuresDescriptionsResponse();
+//   }, []);
+
+//   console.log(everyFeature, "lets see it");

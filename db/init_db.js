@@ -194,7 +194,19 @@ async function buildTables() {
 
         console.log("starting to create mechanics tables");
 
-        console.log("starting to create home brew rules table");
+        console.log("Starting to create rules table");
+
+        console.log("Finished creating rule description table");
+
+        await client.query(`
+            CREATE TABLE rule_descriptions (
+              id SERIAL PRIMARY KEY,
+              name varchar(255) UNIQUE NOT NULL,
+              description TEXT
+            );
+        `);
+
+        console.log("starting to create home brew rule description table");
 
         await client.query(`
               CREATE TABLE home_brew_rules (
@@ -227,6 +239,7 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
+    console.log("Populating user data");
     async function createInitialUsers() {
       console.log("Starting to create users...");
       try {
@@ -262,6 +275,9 @@ async function populateInitialData() {
       }
     }
 
+    console.log("Finished populating user data");
+
+    console.log("Populating class data");
     async function createInitialSpellSlotInfo() {
       try {
         const spellSlotData = [
@@ -305,6 +321,7 @@ async function populateInitialData() {
         throw error;
       }
     }
+    console.log("Finished populating class data");
 
     await createInitialUsers();
     // await createInitialSpellSlotInfo();

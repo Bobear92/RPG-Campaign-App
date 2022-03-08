@@ -62,4 +62,7 @@ apiRouter.use("/equipment", equipmentRouter);
 const homeRuleRouter = require("./home_brew_rules");
 apiRouter.use("/home_brew_rules", homeRuleRouter);
 
+const officialRuleRouter = require("./official_rules");
+apiRouter.use("/official_rules", officialRuleRouter);
+
 module.exports = apiRouter;

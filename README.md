@@ -107,7 +107,7 @@ If you need to rebuild your database on heroku, you can do so right now with thi
 heroku run npm run db:build
 ```
 
-Which will run `npm run db:build` on the heroku server.
+Which will run npm run db:build on the heroku server.
 
 6:
 If you want to populate scripts run these below
@@ -130,6 +130,12 @@ Equipment:
 
 ```bash
 heroku run npm run seed-equipment
+```
+
+Official Rules:
+
+```bash
+heroku run npm run seed-rules
 ```
 
 7:

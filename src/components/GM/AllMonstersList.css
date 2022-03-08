@@ -1,0 +1,19 @@
+.all-monsters-list-main-container {
+  border: 1.5px solid black;
+  height: 80vh;
+  padding: 0.5rem;
+  background-image: url("https://www.teahub.io/photos/full/190-1905390_fantasy-library-concept-art.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+  overflow: auto;
+}
+
+.all-monsters-list-monster-card-container {
+  background-color: rgb(65, 47, 23);
+}
+
+.all-monsters-list-unpopulated-container {
+  display: flex;
+  justify-content: center;
+}

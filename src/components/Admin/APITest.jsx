@@ -5,6 +5,8 @@ import {
   eachRule,
 } from "../../api/official_rules";
 
+import "./APITest.css";
+
 const APITest = () => {
   const [categories, setCategories] = useState([]);
   const [ruleCat, setRuleCat] = useState([]);
@@ -61,8 +63,8 @@ const APITest = () => {
   console.log(rule, "come on");
 
   return (
-    <div>
-      <p>This is where I test api before I put it in the scripts file</p>
+    <div className="api-testing-main-container">
+      <h2>This is where I test api before I put it in the scripts file</h2>
     </div>
   );
 };

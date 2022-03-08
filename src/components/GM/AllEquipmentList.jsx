@@ -1,19 +1,22 @@
 import React, { useState, Fragment } from "react";
 import { EquipmentCard } from "../Utility";
+import "./AllEquipmentList.css";
 
 const AllEquipmentList = ({ allMyEquipment }) => {
   return (
-    <div>
+    <div className="all-equipment-list-main-container">
       {allMyEquipment && allMyEquipment.length ? (
         allMyEquipment.map((item, idx) => {
           return (
             <Fragment key={`Item in main equipment list ${item.name} ${idx}`}>
-              <EquipmentCard item={item} />
+              <div className="all-equipment-list-equipment-card-container">
+                <EquipmentCard item={item} />
+              </div>
             </Fragment>
           );
         })
       ) : (
-        <div>
+        <div className="all-equipment-list-unpopulated-container">
           <h1>Equipment not populated</h1>
         </div>
       )}

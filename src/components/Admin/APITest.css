@@ -1,10 +1,12 @@
-.individual-spell-main-container {
+.api-testing-main-container {
   border: 1.5px solid black;
   height: 80vh;
   padding: 0.5rem;
-  background-image: url("https://i.pinimg.com/736x/af/f0/0c/aff00c7e284cc05403c755570240b51a.jpg");
+  background-image: url("https://img.wallpapersafari.com/desktop/800/450/30/59/Bo4pPW.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat, repeat;
   overflow: auto;
+  display: flex;
+  justify-content: center;
 }

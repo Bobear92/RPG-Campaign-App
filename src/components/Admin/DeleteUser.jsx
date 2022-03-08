@@ -15,7 +15,7 @@ const DeleteUser = () => {
       <div className="delete-user-border"></div>
       <div className="delete-user-main-container">
         <h1 className="delete-user-title">
-          All data will be lost upon deletion!
+          All user's data will be lost upon deletion!
         </h1>
         <div className="delete-user-delete-container">
           <h3>Do you want to delete user {name}?</h3>

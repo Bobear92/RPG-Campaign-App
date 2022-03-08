@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import "./Home.css";
 
 const Home = () => {
-  return <p>This is the Home page.</p>;
+  return (
+    <div className="home-main-container">
+      <p>This is the Home page.</p>;
+    </div>
+  );
 };
 
 export default Home;

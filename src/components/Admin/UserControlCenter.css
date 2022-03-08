@@ -1,7 +1,12 @@
 .user-control-center-main-component {
+  border: 1.5px solid black;
+  height: 80vh;
+  padding: 0.5rem;
   background-image: url("https://img.wallpapersafari.com/desktop/800/450/30/59/Bo4pPW.jpg");
-  margin: 1rem;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat, repeat;
+  overflow: auto;
 }
 
 .user-control-center-title {

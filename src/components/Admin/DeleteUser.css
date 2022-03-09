@@ -6,6 +6,7 @@
   height: 70vh;
   justify-content: center;
   background-image: url("https://media.istockphoto.com/photos/fire-frame-picture-id185263882?k=20&m=185263882&s=612x612&w=0&h=SzYKsKiZYcGZVFrfOyToABmRYKPYZnIl8R-ba0D3E8E=");
+  overflow: auto;
 }
 
 .delete-user-delete-container {

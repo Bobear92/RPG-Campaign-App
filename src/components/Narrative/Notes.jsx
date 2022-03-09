@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import "./Notes.css";
 
 const Notes = () => {
-  return <p>This is the Notes page.</p>;
+  return (
+    <div className="notes-main-container">
+      <p>This is the Notes page.</p>;
+    </div>
+  );
 };
 
 export default Notes;

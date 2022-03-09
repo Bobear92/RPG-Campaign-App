@@ -3,11 +3,15 @@ import { NavLink, Link } from "react-router-dom";
 
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = ({ GM }) => {
   return (
     <div className="footer-main-container">
       <div className="footer-campaign-chooser-container">
-        <p>Where you will choose the campaign</p>
+        {GM ? (
+          <Link to={`/create-campaign`}>Create Campaign</Link>
+        ) : (
+          "Select Campaign"
+        )}
       </div>
     </div>
   );

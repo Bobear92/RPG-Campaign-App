@@ -7,6 +7,7 @@ const {
   updateRuleVisibleStatus,
 } = require("../db/home_brew_rules");
 
+// post
 homeRuleRouter.post("/", async (req, res, next) => {
   const { name, description, visible, gm } = req.body;
   if (!name || !description || !visible || !gm) {
@@ -31,6 +32,7 @@ homeRuleRouter.post("/", async (req, res, next) => {
   }
 });
 
+// get
 homeRuleRouter.get("/", async (req, res, next) => {
   try {
     const rules = await getAllMyRules();
@@ -46,6 +48,7 @@ homeRuleRouter.get("/", async (req, res, next) => {
   }
 });
 
+// delete
 homeRuleRouter.delete("/:ruleId", async (req, res, next) => {
   const id = req.params.ruleId;
 
@@ -63,6 +66,7 @@ homeRuleRouter.delete("/:ruleId", async (req, res, next) => {
   }
 });
 
+// patch
 homeRuleRouter.patch("/", async (req, res, next) => {
   const { id, visible } = req.body;
   try {

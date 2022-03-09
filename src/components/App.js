@@ -59,6 +59,7 @@ import {
   AllMonstersList,
   AllEquipmentList,
   AllOfficialRules,
+  CreateNewCampaign,
 } from "./GM";
 
 import {
@@ -317,6 +318,9 @@ const App = () => {
           <Route path="/all-official-rules">
             <AllOfficialRules allOfficialRules={allOfficialRules} />
           </Route>
+          <Route path="/create-campaign">
+            <CreateNewCampaign GM={GM} />
+          </Route>
           {/* // */}
           {/* Utility Routes */}
           {/* // */}
@@ -337,7 +341,7 @@ const App = () => {
             <IndividualOfficialRule allOfficialRules={allOfficialRules} />
           </Route>
         </Switch>
-        <Footer />
+        <Footer GM={GM} />
       </Router>
     </>
   );

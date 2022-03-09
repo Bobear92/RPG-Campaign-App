@@ -65,4 +65,10 @@ apiRouter.use("/home_brew_rules", homeRuleRouter);
 const officialRuleRouter = require("./official_rules");
 apiRouter.use("/official_rules", officialRuleRouter);
 
+const feedbackRouter = require("./feedback");
+apiRouter.use("/feedback", feedbackRouter);
+
+const campaignsRouter = require("./campaigns");
+apiRouter.use("/campaigns", campaignsRouter);
+
 module.exports = apiRouter;

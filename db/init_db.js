@@ -16,11 +16,14 @@ async function buildTables() {
       // drop all tables, in the correct order
       try {
         await client.query(`
+        DROP TABLE IF EXISTS feedback;
         DROP TABLE IF EXISTS home_brew_rules;
+        DROP TABLE IF EXISTS rule_descriptions;
         DROP TABLE IF EXISTS class_spell_info;
         DROP TABLE IF EXISTS equipment;
         DROP TABLE IF EXISTS monsters;
         DROP TABLE IF EXISTS spells;
+        DROP TABLE IF EXISTS campaigns;
         DROP TABLE IF EXISTS users;
       `);
 
@@ -51,6 +54,26 @@ async function buildTables() {
     `);
 
         console.log("finished user table");
+
+        // gm tables
+        console.log("starting gm tables");
+
+        // campaign table
+
+        console.log("starting to create campaign table");
+        await client.query(`
+          CREATE TABLE campaigns (
+            id SERIAL PRIMARY KEY,
+            name varchar(255) UNIQUE NOT NULL, 
+            gm TEXT NOT NULL
+          )
+          `);
+
+        console.log("finished creating campaign table");
+
+        console.log("finished gm tables");
+
+        // data tables
 
         console.log("starting data tables");
 
@@ -156,10 +179,12 @@ async function buildTables() {
 
         console.log("finished creating data tables");
 
+        // class tables
+
         console.log("starting to create class tables");
 
+        // spell slots
         console.log("creating spell slot / spells known table");
-
         await client.query(`
               CREATE TABLE class_spell_info (
                 id SERIAL PRIMARY KEY,
@@ -192,12 +217,12 @@ async function buildTables() {
 
         console.log("Finished creating class tables");
 
+        //mechanics tables
+
         console.log("starting to create mechanics tables");
 
+        // official rules
         console.log("Starting to create rules table");
-
-        console.log("Finished creating rule description table");
-
         await client.query(`
             CREATE TABLE rule_descriptions (
               id SERIAL PRIMARY KEY,
@@ -206,8 +231,11 @@ async function buildTables() {
             );
         `);
 
-        console.log("starting to create home brew rule description table");
+        console.log("Finished creating rule description table");
 
+        // Home brew rules
+
+        console.log("starting to create home brew rule description table");
         await client.query(`
               CREATE TABLE home_brew_rules (
                 id SERIAL PRIMARY KEY,
@@ -221,6 +249,23 @@ async function buildTables() {
         console.log("Finished creating home brew rules table");
 
         console.log("Finished creating mechanics tables");
+
+        // player interactive tables
+
+        console.log("Starting to create player interactive tables");
+
+        // feed back
+        console.log("starting to create feed back table");
+        await client.query(`
+           CREATE Table feedback (
+            id SERIAL PRIMARY KEY,
+            name varchar(255) UNIQUE NOT NULL,
+            feedback text,
+            gm text
+           );
+        `);
+
+        console.log("finished creating feedback table");
 
         console.log("Finished building tables");
       } catch (error) {

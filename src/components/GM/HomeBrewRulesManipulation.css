@@ -2,8 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid black;
-  margin: 1rem;
+  border: 1.5px solid black;
+  height: 80vh;
+  padding: 0.5rem;
+  background-image: url("https://www.teahub.io/photos/full/190-1905390_fantasy-library-concept-art.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat, repeat;
+  overflow: auto;
 }
 
 .home-rule-manipulation-content-main-container {

@@ -369,7 +369,7 @@ async function populateInitialData() {
     console.log("Finished populating class data");
 
     await createInitialUsers();
-    // await createInitialSpellSlotInfo();
+    await createInitialSpellSlotInfo();
   } catch (error) {
     throw error;
   }
